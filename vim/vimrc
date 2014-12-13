@@ -1,0 +1,99 @@
+" Basic Settings {{{
+" Making gvim legible on 4k screens. 
+set guifont=Consolas:h12
+syntax on
+set foldlevelstart=0
+set tabstop=4
+set shiftwidth=4
+set expandtab
+" Set relative line numbers for faster vertical movement.
+set number
+set relativenumber
+set numberwidth=2
+" Set for faster horizontal movement.
+set sidescroll=10
+set listchars+=precedes:<,extends:>
+set nowrap
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+" }}}
+
+" Mappings {{{
+let mapleader = " "
+let maplocalleader = "\\"
+" Quick edit .vimrc file
+nnoremap <leader>rc :split $MYVIMRC<cr>
+nnoremap <leader>src :source $MYVIMRC<cr>
+" My Esc key is too small!
+inoremap jk <esc>
+inoremap <esc> <nop>
+vnoremap jk <esc>
+vnoremap <esc> <nop>
+
+" Map - to moving current line down one line.
+nnoremap <leader>- ddp
+" Clears line and drops into insert mode.
+nnoremap <leader>cl ddO
+" Map _ to moving current line up one line.
+nnoremap <leader>_ kddpk
+
+" Changes word at cursor to uppercase.
+inoremap <c-u> <esc>viwUi
+" Surround word under curser in quotes.
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+" Surround selected text in quotes.
+vnoremap <leader>' <esc>`<i"<esc>`>a'
+vnoremap <leader>" <esc>`<i"<esc>`>a"
+" Surround selected text in brackets.
+vnoremap <leader>{ <esc>`>a}<esc>`<i{
+vnoremap <leader>( <esc>`>a)<esc>`<i(
+vnoremap <leader>< <esc>`>a><esc>`<i<
+vnoremap <leader>[ <esc>`>a]<esc>`<i[
+" Operators to search inside various brackets.
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap in( :<c-u>normal! f)vi(<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+onoremap in{ :<c-u>normal! f}vi{<cr>
+onoremap il[ :<c-u>normal! F]vi[<cr>
+onoremap in[ :<c-u>normal! f]vi[<cr>
+onoremap il< :<c-u>normal! F>vi<<cr>
+onoremap in< :<c-u>normal! f>vi<<cr>
+" Operator to search for the next email address.
+onoremap in@ :<c-u>normal! f@F lvf@f.2w<cr>
+" }}}
+
+" Abbreviations {{{
+iabbrev @@ yungjinhu@gmail.com 
+" }}}
+
+" Status Line {{{
+set statusline=%.20F        " Full path to file (20 character limit).
+set statusline+=%=          " Switch to the right side.
+set statusline+=%l/%L       " Current/Total line.
+set statusline+=\ (%p%%)    " Current % in file.
+" }}}
+
+" FileType-specific settings {{{
+" Html {{{
+    augroup filetype_html
+        autocmd!
+        autocmd filetype html nnoremap <buffer> <localleader>f vatzf
+    augroup end
+" }}}
+
+" Markdown {{{
+augroup filetype_markdown
+    autocmd!
+    " The OR (\|) operator in an execute command is \\\| (ulgh!)
+    autocmd FileType markdown onoremap <buffer> ih :<c-u>execute "normal! ?^==\\+\\\|--\\+$\r:nohlsearch\rkvg_"<cr>
+    autocmd FileType markdown onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+\\\|--\\+$\r:nohlsearch\rg_vk0"<cr>
+augroup END
+" }}}
+
+" Vimscript {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+" }}}
