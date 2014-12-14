@@ -14,7 +14,9 @@ set numberwidth=2
 set sidescroll=10
 set listchars+=precedes:<,extends:>
 set nowrap
+set autoindent
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+highlight WhiteSpaceEOL ctermbg=darkgreen
 " }}}
 
 " Mappings {{{
@@ -23,12 +25,10 @@ let maplocalleader = "\\"
 " Quick edit .vimrc file
 nnoremap <leader>rc :split $MYVIMRC<cr>
 nnoremap <leader>src :source $MYVIMRC<cr>
-" My Esc key is too small!
-inoremap jk <esc>
-inoremap <esc> <nop>
-vnoremap jk <esc>
-vnoremap <esc> <nop>
-
+" Map Q to re-flow paragraph
+nnoremap Q gqap
+" Map <f7> to toggle spell checking
+nnoremap <f7> :setlocal spell! spelllang=en_us<cr>
 " Map - to moving current line down one line.
 nnoremap <leader>- ddp
 " Clears line and drops into insert mode.
