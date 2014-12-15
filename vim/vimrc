@@ -1,6 +1,7 @@
 " Basic Settings {{{
 " Making gvim legible on 4k screens. 
 set guifont=Consolas:h12
+set term=screen-256color
 syntax on
 set foldlevelstart=0
 set tabstop=4
@@ -16,29 +17,45 @@ set listchars+=precedes:<,extends:>
 set nowrap
 set autoindent
 autocmd BufNewFile,BufRead *.md set filetype=markdown
-highlight WhiteSpaceEOL ctermbg=darkgreen
+set hlsearch incsearch
 " }}}
 
 " Mappings {{{
 let mapleader = " "
 let maplocalleader = "\\"
-" Quick edit .vimrc file
+" Quick edit and source .vimrc file.
 nnoremap <leader>rc :split $MYVIMRC<cr>
 nnoremap <leader>src :source $MYVIMRC<cr>
-" Map Q to re-flow paragraph
+" Toggle highlight for whitespace at the end of a line.
+nnoremap <leader>w :match Error /\v\s+$/<cr>
+nnoremap <leader>W :match none<cr>
+" Always use very magic mode for searching to minimize Regex tears.
+nnoremap / /\v
+" Turn off highlighting items from the last search.
+nnoremap <leader>/ :nohlsearch<cr>
+" Cycle forward one buffer.
+nnoremap <leader><tab> <C-W><C-W>
+" Quickfix List movement.
+nnoremap <leader>cn :cnext<cr>
+nnoremap <leader>cN :cprevious<cr>
+nnoremap <leader>cc :cclose<cr>
+" Re-flow paragraph.
 nnoremap Q gqap
-" Map <f7> to toggle spell checking
+" Toggle spell checking.
 nnoremap <f7> :setlocal spell! spelllang=en_us<cr>
-" Map - to moving current line down one line.
+" Opens previous buffer in an above split.
+nnoremap <leader>st :execute "leftabove split " . bufname("#")<cr>
+" Move current line down one line.
 nnoremap <leader>- ddp
+" Move current line up one line.
+nnoremap <leader>_ kddpk
 " Clears line and drops into insert mode.
 nnoremap <leader>cl ddO
-" Map _ to moving current line up one line.
-nnoremap <leader>_ kddpk
-
+" Adds semicolon to end of current line without moving cursor.
+nnoremap <leader>; :execute "normal! mqA;\e`q"<cr>
 " Changes word at cursor to uppercase.
 inoremap <c-u> <esc>viwUi
-" Surround word under curser in quotes.
+" Surround word under cursor in quotes.
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 " Surround selected text in quotes.
