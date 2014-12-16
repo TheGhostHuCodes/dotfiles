@@ -1,7 +1,12 @@
 " Basic Settings {{{
-" Making gvim legible on 4k screens. 
-set guifont=Consolas:h12
-set term=screen-256color
+if has ("win32")
+    " Making gvim legible on 4k screens.
+    set guifont=Consolas:h12
+endif
+if has ("unix")
+    " For zsh settings.
+    set term=screen-256color
+endif
 syntax on
 set foldlevelstart=0
 set tabstop=4
