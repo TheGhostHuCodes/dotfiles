@@ -49,6 +49,9 @@ nnoremap <leader>cc :cclose<cr>
 nnoremap Q gqap
 " Toggle spell checking.
 nnoremap <f7> :setlocal spell! spelllang=en_us<cr>
+" Toggle local line numbers and relative line numbers.
+nnoremap <leader>N :setlocal number!<cr>
+nnoremap <leader>RN :setlocal relativenumber!<cr>
 " Opens previous buffer in an above split.
 nnoremap <leader>st :execute "leftabove split " . bufname("#")<cr>
 " Move current line down one line.
