@@ -38,8 +38,9 @@ nnoremap <leader>W :match none<cr>
 nnoremap / /\v
 " Turn off highlighting items from the last search.
 nnoremap <leader>/ :nohlsearch<cr>
-" Cycle forward one buffer.
+" Cycle forward and backwards one buffer.
 nnoremap <leader><tab> <C-W><C-W>
+nnoremap <leader><S-tab> <C-W>W
 " Quickfix List movement.
 nnoremap <leader>cn :cnext<cr>
 nnoremap <leader>cN :cprevious<cr>
