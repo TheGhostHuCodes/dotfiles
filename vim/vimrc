@@ -1,3 +1,14 @@
+" Vundle Settings {{{
+set nocompatible 
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'file:///~/.vim/bundle/potion'
+call vundle#end()
+filetype plugin indent on
+" }}}
+
 " Basic Settings {{{
 if has ("win32")
     " Making gvim legible on 4k screens.
