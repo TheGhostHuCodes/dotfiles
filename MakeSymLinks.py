@@ -5,9 +5,12 @@ import datetime
 import shutil
 
 homePath = os.path.expanduser("~")
-vimrcSourcePath = os.path.join(os.getcwd(), "vim/vimrc")
+# Repo File Structure.
+dotVimrcFilePath = os.path.join(os.getcwd(), "vim/vimrc")
+# Target File Structure.
 vimrcTargetPath = os.path.join(homePath, ".vimrc")
-print(".vimrc source path: ", vimrcSourcePath)
+
+print(".vimrc source path: ", dotVimrcFilePath)
 print(".vimrc target path: ", vimrcTargetPath)
 if os.path.isfile(vimrcTargetPath) or os.path.islink(vimrcTargetPath):
     # Once a second updates of dotfiles is probably ok.
@@ -19,4 +22,4 @@ if os.path.isfile(vimrcTargetPath) or os.path.islink(vimrcTargetPath):
     print("cleaning up old files into directory: ", backupPath)
     shutil.move(vimrcTargetPath, backupPath)
     
-os.symlink(vimrcSourcePath, vimrcTargetPath)
+os.symlink(dotVimrcFilePath, vimrcTargetPath)
