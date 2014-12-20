@@ -4,7 +4,8 @@ filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'file:///~/.vim/bundle/potion'
+" Plugins in development.
+Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
 filetype plugin indent on
 " }}}
