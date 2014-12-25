@@ -4,6 +4,7 @@ filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-dispatch'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
