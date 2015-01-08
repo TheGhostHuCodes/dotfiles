@@ -86,8 +86,8 @@ inoremap <c-u> <esc>viwUi
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 " Surround selected text in quotes.
-vnoremap <leader>' <esc>`<i"<esc>`>a'
-vnoremap <leader>" <esc>`<i"<esc>`>a"
+vnoremap <leader>' <esc>`>a'<esc>`<i'
+vnoremap <leader>" <esc>`>a"<esc>`<i"
 " Surround selected text in brackets.
 vnoremap <leader>{ <esc>`>a}<esc>`<i{
 vnoremap <leader>( <esc>`>a)<esc>`<i(
