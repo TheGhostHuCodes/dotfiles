@@ -4,6 +4,9 @@ filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'altercation/vim-colors-solarized'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
@@ -19,7 +22,10 @@ if has ("unix")
     " For zsh settings.
     set term=screen-256color
 endif
+" Turn on Solarized color scheme.
 syntax on
+set background=dark
+colorscheme solarized
 set foldlevelstart=0
 set tabstop=4
 set shiftwidth=4
