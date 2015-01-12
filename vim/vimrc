@@ -82,6 +82,13 @@ nnoremap <leader>cl ddO
 nnoremap <leader>; :execute "normal! mqA;\e`q"<cr>
 " Changes word at cursor to uppercase.
 inoremap <c-u> <esc>viwUi
+" Make surrounding characters managable.
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap < <><Esc>i
+inoremap { {<CR>}<Esc>O
+inoremap " ""<Esc>i
+inoremap ' ''<Esc>i
 " Surround word under cursor in quotes.
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
