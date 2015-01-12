@@ -17,6 +17,8 @@ filetype plugin indent on
 if has ("win32")
     " Making gvim legible on 4k screens.
     set guifont=Consolas:h12
+    " Please stop dinging at me.
+    set vb t_vb=
 endif
 if has ("unix")
     " For zsh settings.
