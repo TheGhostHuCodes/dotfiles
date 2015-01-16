@@ -157,6 +157,13 @@ set statusline+=\ (%p%%)    " Current % in file.
     augroup end
 " }}}
 
+" C/C++ {{{
+    augroup filetype_cpp
+        autocmd!
+        autocmd filetype cpp setlocal foldmethod=syntax
+    augroup end
+" }}}
+
 " Markdown {{{
 augroup filetype_markdown
     autocmd!
