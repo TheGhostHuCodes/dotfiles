@@ -91,6 +91,8 @@ inoremap < <><Esc>i
 inoremap { {<CR>}<Esc>O
 inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
+" Append semicolon at end of line.
+inoremap <leader>; <C-o>A;
 " Surround word under cursor in quotes.
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
