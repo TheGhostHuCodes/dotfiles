@@ -46,7 +46,7 @@ set hlsearch incsearch
 " }}}
 
 " Mappings {{{
-let mapleader = " "
+let mapleader = ","
 let maplocalleader = "\\"
 " Quick edit and source .vimrc file.
 nnoremap <leader>rc :split $MYVIMRC<cr>
