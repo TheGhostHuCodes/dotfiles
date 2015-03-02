@@ -81,8 +81,9 @@ nnoremap <leader>- ddp
 nnoremap <leader>_ kddpk
 " Clears line and drops into insert mode.
 nnoremap <leader>cl ddO
-" Adds semicolon to end of current line without moving cursor.
+" Adds colon and semicolon to end of current line without moving cursor.
 nnoremap <leader>; :execute "normal! mqA;\e`q"<cr>
+nnoremap <leader>: :execute "normal! mqA:\e`q"<cr>
 " Changes word at cursor to uppercase.
 inoremap <c-u> <esc>viwUi
 " Make surrounding characters managable.
