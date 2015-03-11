@@ -44,6 +44,8 @@ set nowrap
 set autoindent
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 set hlsearch incsearch
+" Autowrite when moving buffers.
+set autowriteall
 " }}}
 
 " Mappings {{{
