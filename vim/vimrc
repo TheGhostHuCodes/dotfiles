@@ -91,10 +91,7 @@ inoremap <c-u> <esc>viwUi
 " Make surrounding characters managable.
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
-inoremap < <><Esc>i
-inoremap { {<CR>}<Esc>O
-inoremap " ""<Esc>i
-inoremap ' ''<Esc>i
+inoremap { {}<Esc>i
 " Append semicolon at end of line.
 inoremap <leader>; <C-o>A;
 " Surround word under cursor in quotes.
