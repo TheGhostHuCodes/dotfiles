@@ -8,6 +8,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rodjek/vim-puppet'
+Plugin 'Valloric/YouCompleteMe'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
@@ -43,6 +44,7 @@ set listchars+=precedes:<,extends:>
 set nowrap
 set autoindent
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd CompleteDone * pclose
 set hlsearch incsearch
 " Autowrite when moving buffers.
 set autowriteall
