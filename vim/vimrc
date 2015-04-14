@@ -81,6 +81,9 @@ nnoremap <leader>cN :cprevious<cr>
 nnoremap <leader>cc :cclose<cr>
 " Re-flow paragraph.
 nnoremap Q gqap
+" clangformat
+noremap <leader>R :pyf /usr/local/bin/clang-format.py<cr>
+inoremap <leader>R <c-o>:pyf /usr/local/bin/clang-format.py<cr>
 " Toggle spell checking.
 nnoremap <f7> :setlocal spell! spelllang=en_us<cr>
 " Toggle local line numbers and relative line numbers.
