@@ -44,7 +44,7 @@ set sidescroll=10
 set listchars+=precedes:<,extends:>
 set nowrap
 set autoindent
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.md setfiletype markdown
 autocmd CompleteDone * pclose
 set hlsearch incsearch
 " Autowrite when moving buffers.
@@ -176,10 +176,7 @@ set statusline+=\ (%p%%)    " Current % in file.
     augroup filetype_html
         autocmd!
         autocmd filetype html nnoremap <buffer> <localleader>f vatzf
-        set tabstop=2
-        set softtabstop=2
-        set shiftwidth=2
-        set expandtab
+        setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     augroup end
 " }}}
 
