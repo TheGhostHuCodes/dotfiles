@@ -49,21 +49,26 @@ autocmd CompleteDone * pclose
 set hlsearch incsearch
 " Autowrite when moving buffers.
 set autowriteall
-" Automatically remove trailing whitespace before saving. Retains cursor
-" position and last search.
-function! <SID>StripTrailingWhitespaces()
+" Preserve last search and cursor position after command.
+function! <SID>Preserve(command)
     " Save last search, and cursor position.
     let _s=@/
     let l = line(".")
     let c = col(".")
-    " Remove trailing spaces
-    %s/\s\+$//e
+    " Execute command.
+    execute a:command
     " Restore previous search history, and cursor position.
     let @/=_s
     call cursor(l, c)
 endfunction
+" Automatically remove trailing whitespace before saving.
+function! <SID>StripTrailingWhitespaces()
+    call <SID>Preserve("%s/\\s\\+$//e")
+endfunction
 " Whitelist of files that can have trailing whitespace removed.
 autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+nmap _$ :call Preserve("%s/\\s\\+$//e")<cr>
+nmap _= :call Preserve("normal gg=G")<cr>
 " }}}
 
 " Mappings {{{
