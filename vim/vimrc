@@ -176,6 +176,10 @@ set statusline+=\ (%p%%)    " Current % in file.
     augroup filetype_html
         autocmd!
         autocmd filetype html nnoremap <buffer> <localleader>f vatzf
+        set tabstop=2
+        set softtabstop=2
+        set shiftwidth=2
+        set expandtab
     augroup end
 " }}}
 
