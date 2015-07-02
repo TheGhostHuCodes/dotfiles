@@ -131,6 +131,10 @@ onoremap il< :<c-u>normal! F>vi<<cr>
 onoremap in< :<c-u>normal! f>vi<<cr>
 " Operator to search for the next email address.
 onoremap in@ :<c-u>normal! f@F lvf@f.2w<cr>
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<cr>
+" Use the same symbols as TextMae for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
 
 nnoremap <leader>f :call <SID>FoldColumnToggle()<cr>
 function! s:FoldColumnToggle()
