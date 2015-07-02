@@ -6,6 +6,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'elzr/vim-json'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rodjek/vim-puppet'
 Plugin 'Valloric/YouCompleteMe'
@@ -178,6 +179,13 @@ set statusline+=\ (%p%%)    " Current % in file.
     augroup filetype_cpp
         autocmd!
         autocmd filetype cpp setlocal foldmethod=syntax
+    augroup end
+" }}}
+"
+" json {{{
+    augroup filetype_json
+        autocmd!
+        autocmd filetype json setlocal foldmethod=syntax
     augroup end
 " }}}
 
