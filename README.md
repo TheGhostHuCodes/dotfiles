@@ -15,12 +15,13 @@ Esc
     sudo apt-get install gnome-tweak-tool
 ```
 
-- In Windows, I use [SharpKeys](https://sharpkeys.codeplex.com/).
+- In OSX, I use [Seil](https://pqrs.org/osx/karabiner/seil.html) to set the
+  control key to be a second Escape key.
+```
+    brew cask install seil
+```
 
-- In OSX, I use a combination of setting the Caps Lock key to be another
-  Control key, and then using
-  [Karabiner](https://pqrs.org/osx/karabiner/index.html.en) to set the control
-  key to be a second Escape key.
+- In Windows, I use [SharpKeys](https://sharpkeys.codeplex.com/).
 
 ###Vim Package Manager
 My current package manager of choice is [Vundle](https://github.com/gmarik/Vundle.vim).
