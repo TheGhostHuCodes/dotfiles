@@ -9,6 +9,7 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'elzr/vim-json'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rodjek/vim-puppet'
+Plugin 'jeetsukumaran/vim-markology'
 Plugin 'Valloric/YouCompleteMe'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
