@@ -13,6 +13,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'rodjek/vim-puppet'
 Plugin 'jeetsukumaran/vim-markology'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'luochen1990/rainbow'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
@@ -72,6 +73,7 @@ endfunction
 autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 nmap _$ :call Preserve("%s/\\s\\+$//e")<cr>
 nmap _= :call Preserve("normal gg=G")<cr>
+let g:rainbow_active = 0
 " }}}
 
 " Mappings {{{
@@ -83,6 +85,8 @@ nnoremap <leader>src :source $MYVIMRC<cr>
 " Toggle highlight for whitespace at the end of a line.
 nnoremap <leader>w :match Error /\v\s+$/<cr>
 nnoremap <leader>W :match none<cr>
+" Toggle RainbowParentheses.
+nnoremap <leader>rt :RainbowToggle<cr>
 " Always use very magic mode for searching to minimize Regex tears.
 nnoremap / /\v
 " Turn off highlighting items from the last search.
