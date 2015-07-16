@@ -13,6 +13,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'rodjek/vim-puppet'
 Plugin 'jeetsukumaran/vim-markology'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
