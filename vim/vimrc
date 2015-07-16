@@ -8,6 +8,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'elzr/vim-json'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'jelera/vim-javascript-syntax'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rodjek/vim-puppet'
 Plugin 'jeetsukumaran/vim-markology'
@@ -199,7 +200,16 @@ set statusline+=\ (%p%%)    " Current % in file.
         autocmd filetype cpp setlocal foldmethod=syntax
     augroup end
 " }}}
-"
+
+" JavaScript {{{
+    augroup javascript
+        autocmd!
+        autocmd filetype javascript setlocal foldmethod=syntax
+        autocmd FileType javascript call JavaScriptFold()
+        setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    augroup end
+" }}}
+
 " json {{{
     augroup filetype_json
         autocmd!
