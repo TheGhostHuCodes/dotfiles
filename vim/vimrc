@@ -8,10 +8,13 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'elzr/vim-json'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'jelera/vim-javascript-syntax'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rodjek/vim-puppet'
 Plugin 'jeetsukumaran/vim-markology'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'luochen1990/rainbow'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
@@ -71,6 +74,7 @@ endfunction
 autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 nmap _$ :call Preserve("%s/\\s\\+$//e")<cr>
 nmap _= :call Preserve("normal gg=G")<cr>
+let g:rainbow_active = 0
 " }}}
 
 " Mappings {{{
@@ -82,6 +86,8 @@ nnoremap <leader>src :source $MYVIMRC<cr>
 " Toggle highlight for whitespace at the end of a line.
 nnoremap <leader>w :match Error /\v\s+$/<cr>
 nnoremap <leader>W :match none<cr>
+" Toggle RainbowParentheses.
+nnoremap <leader>rt :RainbowToggle<cr>
 " Always use very magic mode for searching to minimize Regex tears.
 nnoremap / /\v
 " Turn off highlighting items from the last search.
@@ -199,7 +205,16 @@ set statusline+=\ (%p%%)    " Current % in file.
         autocmd filetype cpp setlocal foldmethod=syntax
     augroup end
 " }}}
-"
+
+" JavaScript {{{
+    augroup javascript
+        autocmd!
+        autocmd filetype javascript setlocal foldmethod=syntax
+        autocmd FileType javascript call JavaScriptFold()
+        setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    augroup end
+" }}}
+
 " json {{{
     augroup filetype_json
         autocmd!
