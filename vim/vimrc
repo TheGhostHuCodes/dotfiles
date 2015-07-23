@@ -15,6 +15,7 @@ Plugin 'jeetsukumaran/vim-markology'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
+Plugin 'sjl/gundo.vim'
 " Plugins in development.
 Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
@@ -75,6 +76,9 @@ autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <
 nmap _$ :call Preserve("%s/\\s\\+$//e")<cr>
 nmap _= :call Preserve("normal gg=G")<cr>
 let g:rainbow_active = 0
+set undofile
+set undodir=~/.vimundo/
+set clipboard=unnamed
 " }}}
 
 " Mappings {{{
@@ -154,7 +158,8 @@ onoremap in@ :<c-u>normal! f@F lvf@f.2w<cr>
 nmap <leader>l :set list!<cr>
 " Use the same symbols as TextMae for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
-
+" Toggle gundo.
+nnoremap U :GundoToggle<cr>
 nnoremap <leader>f :call <SID>FoldColumnToggle()<cr>
 function! s:FoldColumnToggle()
     if &foldcolumn
