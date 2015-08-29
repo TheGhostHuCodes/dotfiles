@@ -82,6 +82,9 @@ set clipboard=unnamed
 set ruler
 " Allow % to jump between angle brackets also.
 set matchpairs+=<:>
+" Ignore case in a smart way while searching.
+set ignorecase
+set smartcase
 " }}}
 
 " Mappings {{{
