@@ -218,6 +218,13 @@ set statusline+=\ (%p%%)    " Current % in file.
         autocmd filetype cpp setlocal foldmethod=syntax
     augroup end
 " }}}
+"
+" Python {{{
+    augroup filetype_python
+        " yapf
+        autocmd FileType python nnoremap <leader>R :0,$!yapf<cr>
+    augroup end
+" }}}
 
 " JavaScript {{{
     augroup javascript
