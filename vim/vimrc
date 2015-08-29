@@ -80,6 +80,8 @@ set undofile
 set undodir=~/.vimundo/
 set clipboard=unnamed
 set ruler
+" Allow % to jump between angle brackets also.
+set matchpairs+=<:>
 " }}}
 
 " Mappings {{{
