@@ -16,6 +16,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
 Plugin 'sjl/gundo.vim'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 call vundle#end()
 filetype plugin indent on
 " }}}
@@ -28,6 +29,7 @@ endif
 if has ("unix")
     " For zsh settings.
     set term=screen-256color
+    let vim_markdown_preview_github=1
 endif
 " Please stop dinging at me.
 set vb t_vb=
