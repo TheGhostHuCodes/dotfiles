@@ -50,7 +50,7 @@ set sidescroll=10
 set listchars+=precedes:<,extends:>
 set nowrap
 set autoindent
-autocmd BufNewFile,BufRead *.md setfiletype markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd CompleteDone * pclose
 set hlsearch incsearch
 " Autowrite when moving buffers.
