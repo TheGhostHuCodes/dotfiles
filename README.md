@@ -13,7 +13,7 @@ Escape key, or to switch the Caps Lock key with the Escape key.
 - In OSX, I use [Seil](https://pqrs.org/osx/karabiner/seil.html) to set the
   control key to be a second Escape key.
 ```
-    brew cask install seil
+brew cask install seil
 ```
 
 - In Xubuntu, I create the file `~/.Xmodmap` with the contents:
@@ -31,7 +31,7 @@ the Escape key.
 
 - In Ubuntu, I use gnome-tweak-tool
 ```
-    sudo apt-get install gnome-tweak-tool
+sudo apt-get install gnome-tweak-tool
 ```
 
 ###Vim Package Manager
