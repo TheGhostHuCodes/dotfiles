@@ -16,8 +16,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
 Plugin 'sjl/gundo.vim'
-" Plugins in development.
-Plugin 'file:///home/yhu/Repos/potion'
 call vundle#end()
 filetype plugin indent on
 " }}}
