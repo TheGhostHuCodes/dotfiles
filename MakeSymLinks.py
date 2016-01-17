@@ -3,6 +3,7 @@ import os
 import os.path
 import datetime
 import shutil
+import errno
 
 class dotfile:
     def __init__(self, fullRepoPath, fullDeploymentPath):
@@ -21,9 +22,15 @@ class dotfile:
         shutil.move(self.fullDeploymentPath, backupPath)
 
     def makeLink(self):
-        if os.path.isfile(self.fullDeploymentPath):
+        if not os.path.islink(self.fullDeploymentPath):
             self.backup(self.fullDeploymentPath)
-        os.symlink(self.fullRepoPath, self.fullDeploymentPath)
+        try:
+            os.symlink(self.fullRepoPath, self.fullDeploymentPath)
+        except OSError as ex:
+            if ex.errno == errno.EEXIST:
+                os.remove(self.fullDeploymentPath)
+                os.symlink(self.fullRepoPath, self.fullDeploymentPath)
+
 
 homePath = os.path.expanduser("~")
 vimrc = dotfile(os.path.join(os.getcwd(), "vim/vimrc"),
