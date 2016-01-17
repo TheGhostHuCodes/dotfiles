@@ -11,6 +11,7 @@ apt-get install zsh
 apt-get install vim
 apt-get install tmux
 apt-get install tree
+apt-get install libgnome2-0 -y
 
 # Desktop usability.
 apt-get install chromium-browser
