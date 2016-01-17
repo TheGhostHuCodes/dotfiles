@@ -32,3 +32,6 @@ vimrc.makeLink();
 tmuxConf = dotfile(os.path.join(os.getcwd(), "tmux/tmux.conf"),
         os.path.join(homePath, ".tmux.conf"))
 tmuxConf.makeLink();
+tmux_osx_conf = dotfile(os.path.join(os.getcwd(), "tmux/tmux-osx.conf"),
+        os.path.join(homePath, ".tmux-osx.conf"))
+tmux_osx_conf.makeLink();
