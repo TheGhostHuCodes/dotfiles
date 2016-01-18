@@ -12,6 +12,7 @@ apt-get install vim
 apt-get install tmux
 apt-get install tree
 apt-get install libgnome2-0 -y
+apt-get install whois
 
 # Desktop usability.
 apt-get install chromium-browser
