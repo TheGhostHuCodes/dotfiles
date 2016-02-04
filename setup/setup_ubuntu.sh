@@ -13,6 +13,7 @@ apt-get install tmux
 apt-get install tree
 apt-get install libgnome2-0 -y
 apt-get install whois
+apt-get install silversearcher-ag -y
 
 # Desktop usability.
 apt-get install chromium-browser
