@@ -42,3 +42,6 @@ tmuxConf.makeLink();
 tmux_osx_conf = dotfile(os.path.join(os.getcwd(), "tmux/tmux-osx.conf"),
         os.path.join(homePath, ".tmux-osx.conf"))
 tmux_osx_conf.makeLink();
+gitconfig = dotfile(os.path.join(os.getcwd(), "git/gitconfig"),
+        os.path.join(homePath, ".gitconfig"))
+gitconfig.makeLink();
