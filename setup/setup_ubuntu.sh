@@ -7,21 +7,22 @@ then
 fi
 
 # Terminal tools.
-apt-get install zsh
-apt-get install vim
-apt-get install tmux
-apt-get install tree
-apt-get install libgnome2-0 -y
-apt-get install whois
-apt-get install silversearcher-ag -y
+apt-get --yes install zsh
+apt-get --yes install vim-gnome-py2
+apt-get --yes install tmux
+apt-get --yes install tree
+apt-get --yes install libgnome2-0
+apt-get --yes install whois
+apt-get --yes install silversearcher-ag
 
 # Desktop usability.
-apt-get install chromium-browser
-apt-get install gnome-tweak-tool
+apt-get --yes install chromium-browser
+apt-get --yes install gnome-tweak-tool
+apt-get --yes install steam
 
 # Version control.
-apt-get install git
-apt-get install openssh-server
+apt-get --yes install git
+apt-get --yes install openssh-server
 
 # For building unison.
-apt-get install ocaml liblablgtk2-ocaml-dev
+apt-get --yes install ocaml liblablgtk2-ocaml-dev
