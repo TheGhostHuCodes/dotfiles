@@ -17,6 +17,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
 Plugin 'sjl/gundo.vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'marijnh/tern_for_vim'
 call vundle#end()
 filetype plugin indent on
 " }}}
@@ -35,7 +36,9 @@ endif
 set vb t_vb=
 " Turn on Solarized color scheme.
 syntax on
-set background=dark
+let g:solarized_termcolors=256
+set t_Co=256
+"set background=dark
 colorscheme solarized
 set foldlevelstart=0
 set tabstop=4
