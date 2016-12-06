@@ -16,6 +16,13 @@ Escape key, or to switch the Caps Lock key with the Escape key.
 brew cask install seil
 ```
 
+- After updating macOS to Sierra, Seil no longer works. The updated version of
+  the tool seems to be called
+  [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements).
+```
+brew cask install karabiner-elements
+```
+
 - In Xubuntu, I create the file `~/.Xmodmap` with the contents:
 ```
 ! Swap Caps Lock and Escape keys
