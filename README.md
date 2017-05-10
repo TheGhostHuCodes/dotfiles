@@ -1,10 +1,10 @@
-#dotfiles
+# dotfiles
 
 These are my dotfiles for vim, git, and tmux.
 
-##Prerequisites
+## Prerequisites
 
-###The Escape Key
+### The Escape Key
 
 The Escape key on most modern keyboards are ridiculously small. The best way I
 have found to solve this problem is to remap the Caps Lock key to be a second
@@ -41,5 +41,5 @@ the Escape key.
 sudo apt-get install gnome-tweak-tool
 ```
 
-###Vim Package Manager
+### Vim Package Manager
 My current package manager of choice is [Vundle](https://github.com/gmarik/Vundle.vim).
