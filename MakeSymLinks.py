@@ -11,6 +11,8 @@ class dotfile:
         self.fullRepoPath = fullRepoPath
 
     def backup(self, fullPath):
+	if not os.path.exists(fullPath):
+		return
         baseFolder = os.path.basename(os.path.normpath(fullPath))
         currentTime = datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S')
         backupFolder = currentTime + baseFolder
