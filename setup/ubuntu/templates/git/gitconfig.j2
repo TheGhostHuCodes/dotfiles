@@ -1,0 +1,32 @@
+[user]
+	name = {{ git_personal_name }}
+	email = {{ git_personal_email }}
+
+[color]
+	status = auto
+
+[credential]
+	helper = cache --timeout=3600
+
+[core]
+	editor = vim
+
+[push]
+	default = simple
+
+[alias]
+  lg = log --all --oneline --decorate --graph -n30
+  lgall = log --all --oneline --decorate --graph
+
+  athome = "!f() { \
+    git config user.name \"{{ git_personal_name }}\"; \
+    git config user.email \"{{ git_personal_email }}\"; \
+    }; f"
+  atwork = "!f() { \
+    git config user.name \"{{ git_work_name }}\"; \
+    git config user.email \"{{ git_work_email }}\"; \
+    }; f"
+  whoami = "!f() { \
+    git config user.name ; \
+    git config user.email ; \
+    }; f"

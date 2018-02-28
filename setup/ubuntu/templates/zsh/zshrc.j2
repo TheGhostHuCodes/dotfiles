@@ -1,0 +1,53 @@
+# zsh Antigen setup
+source /usr/local/share/antigen/antigen.zsh
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle z
+
+# Add cool substring searching using vim key bindings
+antigen bundle zsh-users/zsh-history-substring-search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle docker
+antigen bundle psprint/zsh-navigation-tools
+
+antigen theme refined
+
+if [[ $(uname) = 'Darwin' ]]; then
+    antigen bundle brew
+    antigen bundle osx
+fi
+
+antigen apply
+
+bindkey -v
+
+
+# Go development
+export GOPATH="${HOME}/repos/go"
+if [[ $(uname) = 'Darwin' ]]; then
+    export GOROOT="$(brew --prefix golang)/libexec"
+fi
+if [[ $(uname) = 'Linux' ]]; then
+    export GOROOT="/usr/lib/go-1.9"
+fi
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+# Make directories if they do not exist.
+test -d "${GOPATH}" || mkdir -p "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+
+# Python development
+if [[ $(uname) = 'Linux' ]]; then
+    export PATH="$PATH:${HOME}/.local/bin"
+fi
+
+# Groovy development
+if [[ $(uname) = 'Darwin' ]]; then
+    export GROOVY_HOME=/usr/local/opt/groovy/libexec
+fi
