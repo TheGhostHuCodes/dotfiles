@@ -1,0 +1,97 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - user_vars.yml
+  tasks:
+    - name: install prerequisite tools
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - curl
+
+    - name: install terminal tools
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - zsh
+        - antigen
+        - vim
+        - tmux
+        - reattach-to-user-namespace
+        - tree
+        - whois
+        - ag
+        - wget
+        - mkdocs
+        - shellcheck
+        - terraform
+        - htop-osx
+
+    - name: install desktop usability applications
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - google-chrome
+        - keepassx
+        - spectacle
+        - flux
+
+    - name: install version control tools
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - git
+
+    - name: install developer tools
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - iterm2
+        - visual-studio-code
+        - virtualbox
+        - vagrant
+        - slack
+
+    - name: install golang
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - golang
+
+    - name: install python3
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - python3
+
+    - name: install pipenv
+      pip:
+        executable: pip3
+        name: pipenv
+
+    - name: install node and npm
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - node
+
+    - name: generate .zshrc file
+      template:
+        src: ../templates/zsh/zshrc.j2
+        dest: ~/.zshrc
+
+    - name: generate .gitconfig file
+      template:
+        src: ../templates/git/gitconfig.j2
+        dest: ~/.gitconfig
+
+    - name: generate .tmux.conf file
+      template:
+        src: ../templates/tmux/tmux.conf.j2
+        dest: ~/.tmux.conf
+
+    - name: generate .tmux-osx.conf file
+      template:
+        src: ../templates/tmux/tmux-osx.conf.j2
+        dest: ~/.tmux-osx.conf

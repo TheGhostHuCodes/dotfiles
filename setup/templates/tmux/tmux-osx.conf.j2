@@ -1,0 +1,15 @@
+# Enable more vim like copy and paste, but keep the default copy-mode binding.
+bind-key [ copy-mode
+unbind-key p
+bind p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+bind-key -T copy-mode-vi 'V' send-keys -X select-line
+bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+bind-key b choose-buffer
+
+# Update default binding of `Enter` to also use copy-pipe.
+unbind-key -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+
+# Copy-paste integration.
+set-option -g default-command "reattach-to-user-namespace -l zsh"
