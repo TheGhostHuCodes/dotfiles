@@ -18,6 +18,11 @@
       shell: echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
       become: True
 
+    - name: add steam apt repository
+      when: gaming
+      apt_repository: repo='deb-src http://repo.steampowered.com/steam/ xenial steam' state=present
+      become: True
+
     - name: install terminal tools
       apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
       become: True
@@ -77,6 +82,13 @@
       with_items:
         - ocaml
         - liblablgtk2-ocaml-dev
+
+    - name: install steam on gaming machines
+      when: gaming
+      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      become: True
+      with_items:
+        - steam
 
     - name: make directory for antigen install
       file: path=/usr/local/share/antigen state=directory
