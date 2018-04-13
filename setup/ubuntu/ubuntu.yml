@@ -90,12 +90,12 @@
 
     - name: generate .zshrc file
       template:
-        src: templates/zsh/zshrc.j2
+        src: ../templates/zsh/zshrc.j2
         dest: ~/.zshrc
 
     - name: generate .gitconfig file
       template:
-        src: templates/git/gitconfig.j2
+        src: ../templates/git/gitconfig.j2
         dest: ~/.gitconfig
 
     - name: change default shell from bash to zsh
