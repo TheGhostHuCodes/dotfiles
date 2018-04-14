@@ -36,6 +36,7 @@
         - keepassx
         - spectacle
         - flux
+        - caffeine
 
     - name: install version control tools
       homebrew: name={{ item }}
