@@ -1,0 +1,264 @@
+set foldmarker=[[[,]]]
+" Vundle Settings [[[
+set nocompatible
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'elzr/vim-json'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'rodjek/vim-puppet'
+Plugin 'jeetsukumaran/vim-markology'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'luochen1990/rainbow'
+Plugin 'sjl/gundo.vim'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+call vundle#end()
+filetype plugin indent on
+" ]]]
+
+" Basic Settings [[[
+if has ("win32")
+    " Making gvim legible on 4k screens.
+    set guifont=Consolas:h12
+endif
+if has ("unix")
+    " For zsh settings.
+    set term=screen-256color
+    let vim_markdown_preview_github=1
+endif
+" Please stop dinging at me.
+set vb t_vb=
+" Turn on Solarized color scheme.
+syntax on
+set background=dark
+colorscheme solarized
+set foldlevelstart=0
+set tabstop=4
+set shiftwidth=4
+set expandtab
+" Set relative line numbers for faster vertical movement.
+set number
+set relativenumber
+set numberwidth=2
+" Set for faster horizontal movement.
+set sidescroll=10
+set listchars+=precedes:<,extends:>
+set nowrap
+set autoindent
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd CompleteDone * pclose
+set hlsearch incsearch
+" Autowrite when moving buffers.
+set autowriteall
+" Preserve last search and cursor position after command.
+function! <SID>Preserve(command)
+    " Save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Execute command.
+    execute a:command
+    " Restore previous search history, and cursor position.
+    let @/=_s
+    call cursor(l, c)
+endfunction
+" Automatically remove trailing whitespace before saving.
+function! <SID>StripTrailingWhitespaces()
+    call <SID>Preserve("%s/\\s\\+$//e")
+endfunction
+" Whitelist of files that can have trailing whitespace removed.
+autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+nmap _$ :call Preserve("%s/\\s\\+$//e")<cr>
+nmap _= :call Preserve("normal gg=G")<cr>
+let g:rainbow_active = 0
+set undofile
+set undodir=~/.vimundo/
+set clipboard=unnamed
+set ruler
+" Allow % to jump between angle brackets also.
+set matchpairs+=<:>
+" Ignore case in a smart way while searching.
+set ignorecase
+set smartcase
+" ]]]
+
+" Mappings [[[
+let mapleader = ","
+let maplocalleader = "\\"
+" Quick edit and source .vimrc file.
+nnoremap <leader>rc :split $MYVIMRC<cr>
+nnoremap <leader>src :source $MYVIMRC<cr>
+" Toggle highlight for whitespace at the end of a line.
+nnoremap <leader>w :match Error /\v\s+$/<cr>
+nnoremap <leader>W :match none<cr>
+" Toggle RainbowParentheses.
+nnoremap <leader>rt :RainbowToggle<cr>
+" Always use very magic mode for searching to minimize Regex tears.
+nnoremap / /\v
+" Turn off highlighting items from the last search.
+nnoremap <leader>/ :nohlsearch<cr>
+" Cycle forward and backwards one buffer.
+nnoremap <leader><tab> <C-W><C-W>
+nnoremap <leader><S-tab> <C-W>W
+" Quickfix List movement.
+nnoremap <leader>cn :cnext<cr>
+nnoremap <leader>cN :cprevious<cr>
+nnoremap <leader>cc :cclose<cr>
+" Re-flow paragraph.
+nnoremap Q gqap
+" clangformat
+noremap <leader>R :pyf /usr/local/bin/clang-format.py<cr>
+inoremap <leader>R <c-o>:pyf /usr/local/bin/clang-format.py<cr>
+" Toggle spell checking.
+nnoremap <f7> :setlocal spell! spelllang=en_us<cr>
+" Toggle local line numbers and relative line numbers.
+nnoremap <leader>N :setlocal number!<cr>
+nnoremap <leader>RN :setlocal relativenumber!<cr>
+" Opens previous buffer in an above split.
+nnoremap <leader>st :execute "leftabove split " . bufname("#")<cr>
+" Move current line down one line.
+nnoremap <leader>- ddp
+" Move current line up one line.
+nnoremap <leader>_ kddpk
+" Clears line and drops into insert mode.
+nnoremap <leader>cl ddO
+" Adds colon and semicolon to end of current line without moving cursor.
+nnoremap <leader>; :execute "normal! mqA;\e`q"<cr>
+nnoremap <leader>: :execute "normal! mqA:\e`q"<cr>
+" Changes word at cursor to uppercase.
+inoremap <c-u> <esc>viwUi
+" Make surrounding characters managable.
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
+" Append semicolon at end of line.
+inoremap <leader>; <C-o>A;
+" Surround word under cursor in quotes.
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+" Surround selected text in quotes.
+vnoremap <leader>' <esc>`>a'<esc>`<i'
+vnoremap <leader>" <esc>`>a"<esc>`<i"
+" Surround selected text in brackets.
+vnoremap <leader>{ <esc>`>a}<esc>`<i{
+vnoremap <leader>( <esc>`>a)<esc>`<i(
+vnoremap <leader>< <esc>`>a><esc>`<i<
+vnoremap <leader>[ <esc>`>a]<esc>`<i[
+" Operators to search inside various brackets.
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap in( :<c-u>normal! f)vi(<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+onoremap in{ :<c-u>normal! f}vi{<cr>
+onoremap il[ :<c-u>normal! F]vi[<cr>
+onoremap in[ :<c-u>normal! f]vi[<cr>
+onoremap il< :<c-u>normal! F>vi<<cr>
+onoremap in< :<c-u>normal! f>vi<<cr>
+" Operator to search for the next email address.
+onoremap in@ :<c-u>normal! f@F lvf@f.2w<cr>
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<cr>
+" Use the same symbols as TextMae for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+" Toggle gundo.
+nnoremap U :GundoToggle<cr>
+nnoremap <leader>f :call <SID>FoldColumnToggle()<cr>
+function! s:FoldColumnToggle()
+    if &foldcolumn
+        setlocal foldcolumn=0
+    else
+        setlocal foldcolumn=4
+    endif
+endfunction
+
+nnoremap <leader>q :call <SID>QuickfixToggle()<cr>
+let g:quickfix_is_open = 0
+function! s:QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+" Remap arrow keys to simplify help search navigation.
+nmap <silent> <RIGHT> :cnext<CR>
+nmap <silent> <RIGHT><RIGHT> :cnfile<CR><C-G>
+nmap <silent> <LEFT> :cprev<CR>
+nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
+" ]]]
+
+" Abbreviations [[[
+iabbrev @@ yungjinhu@gmail.com
+" ]]]
+
+" Status Line [[[
+set statusline=%.20F        " Full path to file (20 character limit).
+set statusline+=%=          " Switch to the right side.
+set statusline+=%l/%L       " Current/Total line.
+set statusline+=\ (%p%%)    " Current % in file.
+" ]]]
+
+" FileType-specific settings [[[
+" Html [[[
+    augroup filetype_html
+        autocmd!
+        autocmd filetype html nnoremap <buffer> <localleader>f vatzf
+        setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    augroup end
+" ]]]
+
+" C/C++ [[[
+    augroup filetype_cpp
+        autocmd!
+        autocmd filetype cpp setlocal foldmethod=syntax
+    augroup end
+" ]]]
+"
+" Python [[[
+    augroup filetype_python
+        " yapf
+        autocmd FileType python nnoremap <leader>R :0,$!yapf<cr>
+    augroup end
+" ]]]
+
+" JavaScript [[[
+    augroup javascript
+        autocmd!
+        autocmd filetype javascript setlocal foldmethod=syntax
+        autocmd FileType javascript call JavaScriptFold()
+        setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    augroup end
+" ]]]
+
+" json [[[
+    augroup filetype_json
+        autocmd!
+        autocmd filetype json setlocal foldmethod=syntax
+    augroup end
+" ]]]
+
+" Markdown [[[
+augroup filetype_markdown
+    autocmd!
+    " The OR (\|) operator in an execute command is \\\| (ulgh!)
+    autocmd FileType markdown onoremap <buffer> ih :<c-u>execute "normal! ?^==\\+\\\|--\\+$\r:nohlsearch\rkvg_"<cr>
+    autocmd FileType markdown onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+\\\|--\\+$\r:nohlsearch\rg_vk0"<cr>
+augroup END
+" ]]]
+
+" Vimscript [[[
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" ]]]
+" ]]]
