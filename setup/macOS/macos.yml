@@ -27,6 +27,7 @@
         - shellcheck
         - terraform
         - htop-osx
+        - jq
 
     - name: install desktop usability applications
       homebrew_cask: name={{ item }}
