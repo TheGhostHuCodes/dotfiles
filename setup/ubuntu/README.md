@@ -1,18 +1,22 @@
-This part of the repository contains files for bootstrapping an ubuntu machine
-from scratch using a small shell script to install ansible, and an ansible
-playbook to set up the machine the rest of the way.
-
-To test these scripts, install vagrant and execute the following commands:
+To test these scripts, ensure that vagrant is installed and execute the
+following commands:
 
 ```shell
 vagrant up
 vagrant ssh
-cd ansible-dotfiles
+cd ansible-dotfiles/ubuntu/
 sudo ./bootstrap_ansible.sh
 ansible-playbook ubuntu.yml
 ```
 
-Ansible expects a yaml file named `user_vars.yml` with the following content:
+To clean up the VM after testing, exit from the VM and execute:
+
+```shell
+vagrant destroy
+```
+
+For both testing and actual deployment, ansible expects a yaml file named
+`user_vars.yml` with the following content:
 
 ```yaml
 git_personal_name: <name>
