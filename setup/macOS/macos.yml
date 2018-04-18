@@ -111,3 +111,8 @@
       template:
         src: ../templates/tmux/tmux-osx.conf.j2
         dest: ~/.tmux-osx.conf
+
+    - name: generate vscode settings.json file
+      template:
+        src: ../templates/vscode/settings.json.j2
+        dest: ~/Library/Application Support/Code/User/settings.json
