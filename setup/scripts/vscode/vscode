@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+export_extensions() {
+  cd "$(dirname "$0")" || exit 1
+  echo "#!/usr/bin/env bash" > extensions.sh
+  echo >> extensions.sh
+  code --list-extensions| xargs -L 1 echo code --install-extension >> extensions.sh
+  chmod +x extensions.sh
+}
+
+install_extensions() {
+  cd "$(dirname "$0")" || exit 1
+  if [[ -f extensions.sh ]]; then
+    ./extensions.sh
+  else
+    echo "extensions.sh does not exist, please generate with vscode export"
+  fi
+}
+
+while getopts ":h" opt; do
+  case ${opt} in
+    h )
+      echo "Usage:"
+      echo "    vscode -h          Display this help message."
+      echo "    vscode export      Export installed vscode extensions"
+      echo "    vscode install     Install stored set of vscode extensions"
+      exit 0
+      ;;
+    \? )
+      echo  "Invalid Operation: -$OPTARG" 1>&2
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+subcommand=$1
+
+case "$subcommand" in
+  export )
+    export_extensions
+    exit 0
+    ;;
+  install )
+    install_extensions
+    exit 0
+    ;;
+esac
