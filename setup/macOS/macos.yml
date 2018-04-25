@@ -119,3 +119,6 @@
 
     - name: install vscode extensions
       shell: ./../scripts/vscode/vscode install
+
+    - name: turn on keyboard key repeat
+      shell: defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
