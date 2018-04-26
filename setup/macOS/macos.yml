@@ -57,6 +57,12 @@
         - slack
         - java
 
+    - name: install developer tool packages
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - antlr
+
     - name: install golang
       homebrew: name={{ item }}
       update_homebrew: yes
