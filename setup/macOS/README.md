@@ -26,6 +26,7 @@ ansible-playbook ubuntu.yml
 When using the ansible homebrew module, the following packages will need your
 password for installation:
 
+- java
 - vagrant
 - virtualbox
 

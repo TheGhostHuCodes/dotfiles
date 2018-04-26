@@ -46,7 +46,7 @@
       with_items:
         - git
 
-    - name: install developer tools
+    - name: install developer tool binaries
       homebrew_cask: name={{ item }}
       update_homebrew: yes
       with_items:
@@ -55,6 +55,7 @@
         - virtualbox
         - vagrant
         - slack
+        - java
 
     - name: install golang
       homebrew: name={{ item }}
