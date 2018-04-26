@@ -28,6 +28,10 @@ antigen apply
 
 bindkey -v
 
+# vim aliases
+if [[ $(uname) = 'Darwin' ]]; then
+    alias vi='mvim -v'
+fi
 
 # Go development
 export GOPATH="${HOME}/repos/go"
