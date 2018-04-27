@@ -33,11 +33,11 @@ set -g status-left-length 40
 # Set datetime on right side of status line.
 set -g status-right "%b-%d %R"
 
-# Enable activity alerts
+# Enable activity alerts.
 set-window-option -g monitor-activity on
 set -g visual-activity on
 
-#Update status bar every x seconds.
+# Update status bar every x seconds.
 set -g status-interval 60
 
 # Enable vi keys.
@@ -46,5 +46,5 @@ set-window-option -g mode-keys vi
 # Disallow auto-window renaming.
 set-window-option -g allow-rename off
 
-# Load OSX related configuration
+# Load OSX related configuration.
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
