@@ -43,5 +43,8 @@ set -g status-interval 60
 # Enable vi keys.
 set-window-option -g mode-keys vi
 
+# Disallow auto-window renaming.
+set-window-option -g allow-rename off
+
 # Load OSX related configuration
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
