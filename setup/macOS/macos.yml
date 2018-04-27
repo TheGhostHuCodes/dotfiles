@@ -28,6 +28,7 @@
         - terraform
         - htop-osx
         - jq
+        - coreutils
         - moreutils
 
     - name: install desktop usability applications
