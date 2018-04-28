@@ -73,7 +73,7 @@ function! <SID>StripTrailingWhitespaces()
     call <SID>Preserve("%s/\\s\\+$//e")
 endfunction
 " Whitelist of files that can have trailing whitespace removed.
-autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,java,markdown,php,ruby,python,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 nmap _$ :call Preserve("%s/\\s\\+$//e")<cr>
 nmap _= :call Preserve("normal gg=G")<cr>
 let g:rainbow_active = 0
