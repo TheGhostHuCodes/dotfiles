@@ -97,9 +97,6 @@
         src: ../templates/vim/vimrc.j2
         dest: ~/.vimrc
 
-    - name: execute VundleInstall
-      shell: vim +PluginInstall +qall
-
     - name: generate .zshrc file
       template:
         src: ../templates/zsh/zshrc.j2

@@ -40,3 +40,5 @@ The following cask packages seem to cause this problem:
 
 - virtualbox
 
+Vundle packages for vi need to be installed separately the first time vi is
+started.
