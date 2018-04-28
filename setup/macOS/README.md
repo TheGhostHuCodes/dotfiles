@@ -16,18 +16,27 @@ git_work_email: <email>
 
 these variables are used when templating some files.
 
-To execute the ansible playbook on a new macOS system: 
+To execute the ansible playbook on a new macOS system:
 
 ```shell
 ./bootstrap_ansible.sh
-ansible-playbook ubuntu.yml
+ansible-playbook macos.yml
 ```
 
-When using the ansible homebrew module, the following packages will need your
-password for installation:
+When using the ansible homebrew module, some packages require you to input your
+password for installation. Doing this once caches the password for the rest of
+the installation. Ansible will pause indefinitely until a password is supplied.
+
+The following cask packages seem to require a password:
 
 - java
 - vagrant
+
+In addition to this, some packages require approval in the `Security & Privacy`
+section of `System Preferences` during installation. This will cause ansible to
+fail at that step, and you will need to execute the playbook again.
+
+The following cask packages seem to cause this problem:
+
 - virtualbox
 
-ansible will pause indefinitely until a password is supplied.
