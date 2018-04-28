@@ -120,6 +120,12 @@
         src: ../templates/tmux/tmux-osx.conf.j2
         dest: ~/.tmux-osx.conf
 
+    - name: Creates vscode user directory
+      file:
+        path: ~/Library/Application Support/Code/User/
+        state: directory
+        mode: 0755
+
     - name: generate vscode settings.json file
       template:
         src: ../templates/vscode/settings.json.j2
