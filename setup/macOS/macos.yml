@@ -53,6 +53,11 @@
       with_items:
         - leiningen
 
+    - name: generate leiningen profiles.clj file
+      template:
+        src: ../templates/leiningen/profiles.clj.j2
+        dest: ~/.lein/profiles.clj
+
     - name: install developer tool binaries
       homebrew_cask: name={{ item }}
       update_homebrew: yes
