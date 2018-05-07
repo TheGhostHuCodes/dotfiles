@@ -4,6 +4,8 @@ macOS installation requires a few manual steps listed below:
   key](https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
 - [Change default commandline to
   zsh](https://apple.stackexchange.com/questions/88278/change-default-shell-from-bash-to-zsh)
+- [Turn off iterm2
+  bell](https://www.quora.com/How-does-one-stop-the-sound-from-iTerm2-in-macOS)
 
 Ansible expects a yaml file named `user_vars.yml` with the following content:
 
