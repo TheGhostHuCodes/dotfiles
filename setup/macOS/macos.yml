@@ -47,6 +47,12 @@
       with_items:
         - git
 
+    - name: install developer build tools
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - leiningen
+
     - name: install developer tool binaries
       homebrew_cask: name={{ item }}
       update_homebrew: yes
