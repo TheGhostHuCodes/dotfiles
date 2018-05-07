@@ -64,11 +64,12 @@
       with_items:
         - antlr
 
-    - name: install golang
+    - name: install golang and tools
       homebrew: name={{ item }}
       update_homebrew: yes
       with_items:
         - golang
+        - dep
 
     - name: install python3
       homebrew: name={{ item }}
