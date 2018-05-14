@@ -40,6 +40,7 @@
         - spectacle
         - flux
         - caffeine
+        - veracrypt
 
     - name: install version control tools
       homebrew: name={{ item }}
