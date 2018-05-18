@@ -17,6 +17,7 @@
         - zsh
         - antigen
         - macvim
+        - neovim
         - tmux
         - reattach-to-user-namespace
         - tree
@@ -93,6 +94,12 @@
       pip:
         executable: pip3
         name: pipenv
+
+    - name: install python3 neovim provider
+      pip:
+        executable: pip3
+        name: neovim
+        extra_args: --user
 
     - name: install node and npm
       homebrew: name={{ item }}
