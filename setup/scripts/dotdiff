@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# dotdiff compares currently deployed system dotfiles with the canonical copies
+# that are stored in the dotfiles repository. Local dotfiles may accidentally
+# be changed on the local system prior to deployment of an ansible playbook.
+# dotdiff allows us to compare these files before deployment and merge any
+# local changes back into the repo before accidentally overwriting them.
+
+PAIRS=(
+  "../templates/vim/vimrc.j2:$HOME/.vimrc"
+  "../templates/zsh/zshrc.j2:$HOME/.zshrc"
+  "../templates/tmux/tmux.conf.j2:$HOME/.tmux.conf"
+  "../templates/tmux/tmux-osx.conf.j2:$HOME/.tmux-osx.conf"
+  "../templates/leiningen/profiles.clj.j2:$HOME/.lein/profiles.clj"
+  "../templates/vscode/settings.json.j2:$HOME/Library/Application Support/Code/User/settings.json"
+)
+# Ensure script is executed relative to the script directory.
+cd "$(dirname "$0")" || exit 1
+
+for i in "${PAIRS[@]}"
+do
+  # Read each pair into its own array, splitting on colon.
+  IFS=':' read -ra PAIR <<< "$i"
+  FST="${PAIR[0]}"
+  SND="${PAIR[1]}"
+  echo "Comparing $FST to $SND"
+  if cmp --quiet "$FST" "$SND"; then
+    printf "FILES UNCHANGED\\n\\n"
+  else
+    printf "#%.0s" {1..80}
+    printf "\\n\\n"
+    colordiff -u "$FST" "$SND"
+    printf "\\n"
+    printf "#%.0s" {1..80}
+    printf "\\n"
+  fi
+done
