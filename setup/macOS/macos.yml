@@ -79,6 +79,17 @@
       with_items:
         - antlr
 
+    - name: install swagger-codegen dependencies
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - java8
+    - name: install swagger-codegen
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - swagger-codegen
+
     - name: install golang and tools
       homebrew: name={{ item }}
       update_homebrew: yes
