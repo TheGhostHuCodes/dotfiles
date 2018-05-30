@@ -50,6 +50,11 @@ test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 if [[ $(uname) = 'Linux' ]]; then
     export PATH="$PATH:${HOME}/.local/bin"
 fi
+# Miniconda setup
+if [[ $(uname) = 'Darwin' ]]; then
+    export PATH="$PATH":/usr/local/miniconda3/bin
+    . /usr/local/miniconda3/etc/profile.d/conda.sh
+fi
 
 # Groovy development
 if [[ $(uname) = 'Darwin' ]]; then

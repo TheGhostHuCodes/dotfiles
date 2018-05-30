@@ -97,6 +97,12 @@
         - golang
         - dep
 
+    - name: install miniconda3
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - miniconda
+
     - name: install python3
       homebrew: name={{ item }}
       update_homebrew: yes
