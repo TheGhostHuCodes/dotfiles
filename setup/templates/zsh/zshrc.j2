@@ -28,6 +28,10 @@ antigen apply
 
 bindkey -v
 
+# Set terminal to UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # vim aliases
 if [[ $(uname) = 'Darwin' ]]; then
     alias vi='mvim -v'
