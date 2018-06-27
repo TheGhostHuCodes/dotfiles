@@ -126,6 +126,18 @@
       with_items:
         - node
 
+    - name: install databases
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - mongodb
+
+    - name: install database tool binaries
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - mongodb-compass
+
     - name: install Vundle the vim bundle manager
       git:
         repo: 'https://github.com/VundleVim/Vundle.vim.git'
