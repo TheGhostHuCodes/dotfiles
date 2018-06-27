@@ -50,17 +50,6 @@
       with_items:
         - git
 
-    - name: install developer build tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
-      with_items:
-        - leiningen
-
-    - name: generate leiningen profiles.clj file
-      template:
-        src: ../templates/leiningen/profiles.clj.j2
-        dest: ~/.lein/profiles.clj
-
     - name: install developer tool binaries
       homebrew_cask: name={{ item }}
       update_homebrew: yes
@@ -79,16 +68,30 @@
       with_items:
         - antlr
 
-    - name: install swagger-codegen dependencies
+    # java 8 is a dependency for swagger-codegen and bazel.
+    - name: install java8
       homebrew_cask: name={{ item }}
       update_homebrew: yes
       with_items:
         - java8
+
     - name: install swagger-codegen
       homebrew: name={{ item }}
       update_homebrew: yes
       with_items:
         - swagger-codegen
+
+    - name: install developer build tools
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - leiningen
+        - bazel
+
+    - name: generate leiningen profiles.clj file
+      template:
+        src: ../templates/leiningen/profiles.clj.j2
+        dest: ~/.lein/profiles.clj
 
     - name: install golang and tools
       homebrew: name={{ item }}
