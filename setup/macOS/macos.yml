@@ -141,6 +141,12 @@
       with_items:
         - mongodb-compass
 
+    - name: install docker
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - docker
+
     - name: install Vundle the vim bundle manager
       git:
         repo: 'https://github.com/VundleVim/Vundle.vim.git'
