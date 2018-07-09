@@ -160,6 +160,12 @@
         repo: 'https://github.com/VundleVim/Vundle.vim.git'
         dest: ~/.vim/bundle/Vundle.vim
 
+    - name: install productivity tools
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - rescuetime
+
     - name: generate .vimrc file
       template:
         src: ../templates/vim/vimrc.j2
