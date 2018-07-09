@@ -4,6 +4,7 @@ code --install-extension Arjun.swagger-viewer
 code --install-extension avli.clojure
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension formulahendry.code-runner
+code --install-extension justusadam.language-haskell
 code --install-extension mauve.terraform
 code --install-extension mike-lischke.vscode-antlr4
 code --install-extension ms-python.python
