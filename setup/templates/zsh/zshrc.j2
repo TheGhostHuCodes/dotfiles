@@ -63,3 +63,8 @@ fi
 if [[ $(uname) = 'Darwin' ]]; then
     export GROOVY_HOME=/usr/local/opt/groovy/libexec
 fi
+
+# Load .local_aliases file if it exists. The .local_aliases file contains
+# aliases which should not be published, or only make sense from the context of
+# a particular machine.
+[ -f .local_aliases ] && source .local_aliases
