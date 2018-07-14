@@ -8,8 +8,8 @@
 
 PAIRS=(
   "../configuration/idea/ideavimrc:$HOME/.ideavimrc"
+  "../configuration/zsh/zshrc:$HOME/.zshrc"
   "../templates/vim/vimrc.j2:$HOME/.vimrc"
-  "../templates/zsh/zshrc.j2:$HOME/.zshrc"
   "../templates/tmux/tmux.conf.j2:$HOME/.tmux.conf"
   "../templates/tmux/tmux-osx.conf.j2:$HOME/.tmux-osx.conf"
   "../templates/leiningen/profiles.clj.j2:$HOME/.lein/profiles.clj"

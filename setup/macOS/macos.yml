@@ -182,9 +182,9 @@
         src: ../configuration/idea/ideavimrc
         dest: ~/.ideavimrc
 
-    - name: generate .zshrc file
+    - name: deploy .zshrc file
       template:
-        src: ../templates/zsh/zshrc.j2
+        src: ../configuration/zsh/zshrc
         dest: ~/.zshrc
 
     - name: generate .gitconfig file
