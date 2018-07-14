@@ -7,6 +7,7 @@
 # local changes back into the repo before accidentally overwriting them.
 
 PAIRS=(
+  "../configuration/idea/ideavimrc:$HOME/.ideavimrc"
   "../templates/vim/vimrc.j2:$HOME/.vimrc"
   "../templates/zsh/zshrc.j2:$HOME/.zshrc"
   "../templates/tmux/tmux.conf.j2:$HOME/.tmux.conf"
