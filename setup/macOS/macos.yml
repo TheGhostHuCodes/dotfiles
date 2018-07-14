@@ -177,6 +177,11 @@
         src: ../templates/vim/vimrc.j2
         dest: ~/.vimrc
 
+    - name: deploy .ideavimrc file
+      copy:
+        src: ../configuration/idea/ideavimrc
+        dest: ~/.ideavimrc
+
     - name: generate .zshrc file
       template:
         src: ../templates/zsh/zshrc.j2
