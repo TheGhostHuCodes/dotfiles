@@ -209,6 +209,17 @@
         state: directory
         mode: 0755
 
+    - name: Creates neovim configuration directory
+      file:
+        path: ~/.config/nvim
+        state: directory
+        mode: 0755
+
+    - name: deploy neovim init.vim file
+      copy:
+        src: ../configuration/neovim/init.vim
+        dest: ~/.config/nvim/init.vim
+
     - name: generate vscode settings.json file
       template:
         src: ../templates/vscode/settings.json.j2
