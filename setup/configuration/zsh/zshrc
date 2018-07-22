@@ -53,10 +53,13 @@ test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 if [[ $(uname) = 'Linux' ]]; then
     export PATH="$PATH:${HOME}/.local/bin"
 fi
-# Miniconda setup
 if [[ $(uname) = 'Darwin' ]]; then
+    # Miniconda setup
     export PATH="$PATH":/usr/local/miniconda3/bin
     . /usr/local/miniconda3/etc/profile.d/conda.sh
+    # pip3 install --user installs to a special directory that needs to be put
+    # into the PATH.
+    export PATH="$PATH:${HOME}/Library/Python/3.6/bin"
 fi
 
 # Groovy development

@@ -132,10 +132,12 @@
         executable: pip3
         name: pipenv
 
-    - name: install python3 neovim provider
+    - name: install python3 neovim provider and tools
       pip:
         executable: pip3
-        name: neovim
+        name:
+          - neovim
+          - neovim-remote
         extra_args: --user
 
     - name: install node and npm
