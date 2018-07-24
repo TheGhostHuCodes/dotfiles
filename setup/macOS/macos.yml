@@ -175,9 +175,9 @@
       with_items:
         - rescuetime
 
-    - name: generate .vimrc file
-      template:
-        src: ../templates/vim/vimrc.j2
+    - name: deploy .vimrc file
+      copy:
+        src: ../configuration/vim/vimrc
         dest: ~/.vimrc
 
     - name: deploy .ideavimrc file

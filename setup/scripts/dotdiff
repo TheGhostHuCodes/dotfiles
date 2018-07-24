@@ -10,7 +10,7 @@ PAIRS=(
   "../configuration/idea/ideavimrc:$HOME/.ideavimrc"
   "../configuration/neovim/init.vim:$HOME/.config/nvim/init.vim"
   "../configuration/zsh/zshrc:$HOME/.zshrc"
-  "../templates/vim/vimrc.j2:$HOME/.vimrc"
+  "../configuration/vim/vimrc:$HOME/.vimrc"
   "../templates/tmux/tmux.conf.j2:$HOME/.tmux.conf"
   "../templates/tmux/tmux-osx.conf.j2:$HOME/.tmux-osx.conf"
   "../templates/leiningen/profiles.clj.j2:$HOME/.lein/profiles.clj"

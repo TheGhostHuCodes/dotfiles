@@ -1,5 +1,4 @@
-set foldmarker=[[[,]]]
-" Vundle Settings [[[
+" Vundle Settings {{{
 set nocompatible
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
@@ -19,9 +18,9 @@ Plugin 'sjl/gundo.vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 call vundle#end()
 filetype plugin indent on
-" ]]]
+" }}}
 
-" Basic Settings [[[
+" Basic Settings {{{
 if has ("win32")
     " Making gvim legible on 4k screens.
     set guifont=Consolas:h12
@@ -85,9 +84,9 @@ set matchpairs+=<:>
 " Ignore case in a smart way while searching.
 set ignorecase
 set smartcase
-" ]]]
+" }}}
 
-" Mappings [[[
+" Mappings {{{
 let mapleader = ","
 let maplocalleader = "\\"
 " Quick edit and source .vimrc file.
@@ -193,71 +192,71 @@ nmap <silent> <RIGHT> :cnext<CR>
 nmap <silent> <RIGHT><RIGHT> :cnfile<CR><C-G>
 nmap <silent> <LEFT> :cprev<CR>
 nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
-" ]]]
+" }}}
 
-" Abbreviations [[[
+" Abbreviations {{{
 iabbrev @@ yungjinhu@gmail.com
-" ]]]
+" }}}
 
-" Status Line [[[
+" Status Line {{{
 set statusline=%.20F        " Full path to file (20 character limit).
 set statusline+=%=          " Switch to the right side.
 set statusline+=%l/%L       " Current/Total line.
 set statusline+=\ (%p%%)    " Current % in file.
-" ]]]
+" }}}
 
-" FileType-specific settings [[[
-" Html [[[
+" FileType-specific settings {{{
+" Html {{{
     augroup filetype_html
         autocmd!
         autocmd filetype html nnoremap <buffer> <localleader>f vatzf
         setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     augroup end
-" ]]]
+" }}}
 
-" C/C++ [[[
+" C/C++ {{{
     augroup filetype_cpp
         autocmd!
         autocmd filetype cpp setlocal foldmethod=syntax
     augroup end
-" ]]]
+" }}}
 "
-" Python [[[
+" Python {{{
     augroup filetype_python
         " yapf
         autocmd FileType python nnoremap <leader>R :0,$!yapf<cr>
     augroup end
-" ]]]
+" }}}
 
-" JavaScript [[[
+" JavaScript {{{
     augroup javascript
         autocmd!
         autocmd filetype javascript setlocal foldmethod=syntax
         autocmd FileType javascript call JavaScriptFold()
         setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     augroup end
-" ]]]
+" }}}
 
-" json [[[
+" json {{{
     augroup filetype_json
         autocmd!
         autocmd filetype json setlocal foldmethod=syntax
     augroup end
-" ]]]
+" }}}
 
-" Markdown [[[
+" Markdown {{{
 augroup filetype_markdown
     autocmd!
     " The OR (\|) operator in an execute command is \\\| (ulgh!)
     autocmd FileType markdown onoremap <buffer> ih :<c-u>execute "normal! ?^==\\+\\\|--\\+$\r:nohlsearch\rkvg_"<cr>
     autocmd FileType markdown onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+\\\|--\\+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
-" ]]]
+" }}}
 
-" Vimscript [[[
+" Vimscript {{{
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
-" ]]]
-" ]]]
+" }}}
+" }}}
