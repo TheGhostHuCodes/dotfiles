@@ -223,6 +223,17 @@
         src: ../configuration/neovim/init.vim
         dest: ~/.config/nvim/init.vim
 
+    - name: Creates neovim spell directory
+      file:
+        path: ~/.config/nvim/spell
+        state: directory
+        mode: 0755
+
+    - name: deploy neovim spellfile
+      copy:
+        src: ../configuration/neovim/spell/en.utf-8.add
+        dest: ~/.config/nvim/spell/en.utf-8.add
+
     - name: generate vscode settings.json file
       template:
         src: ../templates/vscode/settings.json.j2
