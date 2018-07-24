@@ -17,7 +17,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle docker
 antigen bundle psprint/zsh-navigation-tools
 
-antigen theme refined
+antigen theme sorin
 
 if [[ $(uname) = 'Darwin' ]]; then
     antigen bundle brew
