@@ -71,3 +71,6 @@ fi
 # aliases which should not be published, or only make sense from the context of
 # a particular machine.
 [ -f .local_aliases ] && source .local_aliases
+
+# Add fzf to zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
