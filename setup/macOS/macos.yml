@@ -69,6 +69,7 @@
       update_homebrew: yes
       with_items:
         - antlr
+        - protobuf
 
     # java 8 is a dependency for swagger-codegen and bazel.
     - name: install java8
