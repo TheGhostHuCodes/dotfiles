@@ -188,6 +188,11 @@
         src: ../configuration/zsh/zshrc
         dest: ~/.zshrc
 
+    - name: deploy .inputrc file
+      template:
+        src: ../configuration/inputrc
+        dest: ~/.inputrc
+
     - name: generate .gitconfig file
       template:
         src: ../templates/git/gitconfig.j2

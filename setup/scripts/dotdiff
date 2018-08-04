@@ -8,6 +8,7 @@
 
 PAIRS=(
   "../configuration/idea/ideavimrc:$HOME/.ideavimrc"
+  "../configuration/inputrc:$HOME/.inputrc"
   "../configuration/neovim/init.vim:$HOME/.config/nvim/init.vim"
   "../configuration/neovim/spell/en.utf-8.add:$HOME/.config/nvim/spell/en.utf-8.add"
   "../configuration/zsh/zshrc:$HOME/.zshrc"
