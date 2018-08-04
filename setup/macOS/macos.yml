@@ -32,7 +32,6 @@
         - coreutils
         - moreutils
         - colordiff
-        - fzf
 
     - name: install desktop usability applications
       homebrew_cask: name={{ item }}
@@ -207,6 +206,16 @@
       template:
         src: ../templates/tmux/tmux-osx.conf.j2
         dest: ~/.tmux-osx.conf
+
+    - name: Install fzf
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - fzf
+
+    - name: Configure fzf
+      # yes | [command] seems to cause ansible to hang.
+      shell: echo "y\ny\ny\n" | $(brew --prefix)/opt/fzf/install --no-bash --no-fish
 
     - name: Creates vscode user directory
       file:
