@@ -123,16 +123,12 @@
       with_items:
         - miniconda
 
-    - name: install python3
+    - name: install python3 and tooling
       homebrew: name={{ item }}
       update_homebrew: yes
       with_items:
         - python3
-
-    - name: install pipenv
-      pip:
-        executable: pip3
-        name: pipenv
+        - pipenv
 
     - name: install python3 neovim provider and tools
       pip:
