@@ -6,6 +6,7 @@ macOS installation requires a few manual steps listed below:
   zsh](https://apple.stackexchange.com/questions/88278/change-default-shell-from-bash-to-zsh)
 - [Turn off iterm2
   bell](https://www.quora.com/How-does-one-stop-the-sound-from-iTerm2-in-macOS)
+- [Install Amphetamine](https://itunes.apple.com/us/app/amphetamine/id937984704)
 
 Ansible expects a yaml file named `user_vars.yml` with the following content:
 
