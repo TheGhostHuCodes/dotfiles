@@ -31,6 +31,15 @@ bindkey -v
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# Internal utility functions ###################################################
+
+# Returns whether the given command is executable or aliased.
+_has() {
+    return $( whence $1 >/dev/null )
+}
+
+################################################################################
+
 # vim aliases
 if [[ $(uname) = 'Darwin' ]]; then
     alias vi='mvim -v'
@@ -67,10 +76,17 @@ if [[ $(uname) = 'Darwin' ]]; then
     export GROOVY_HOME=/usr/local/opt/groovy/libexec
 fi
 
+# Add fzf to zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Configure fzf to use ag
+if _has fzf && _has ag; then
+    export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+
 # Load .local_aliases file if it exists. The .local_aliases file contains
 # aliases which should not be published, or only make sense from the context of
 # a particular machine.
 [ -f .local_aliases ] && source .local_aliases
-
-# Add fzf to zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
