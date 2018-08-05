@@ -7,7 +7,9 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Add plugins.
 call minpac#add('junegunn/fzf')
+call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('tpope/vim-unimpaired')
+call minpac#add('tpope/vim-dispatch')
 
 " Add optional plugins.
 
