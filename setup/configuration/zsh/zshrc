@@ -42,7 +42,7 @@ _has() {
 
 # vim aliases
 if [[ $(uname) = 'Darwin' ]]; then
-    alias vi='mvim -v'
+    alias vi='nvim'
 fi
 
 # Go development
