@@ -7,6 +7,7 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Add plugins.
 call minpac#add('junegunn/fzf')
+call minpac#add('mhinz/vim-grepper')
 call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-dispatch')
@@ -34,6 +35,16 @@ nmap <silent> [W <Plug>(ale_first)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
+
+" Grepper configuration.
+let g:grepper = {}
+let g:grepper.tools = ['rg', 'git', 'grep']
+nnoremap <Leader>g :Grepper -tool rg<CR>
+" Search for the current word.
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+" Search for the current selection.
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 
 " Preserve last search and cursor position after command.
 function! <SID>Preserve(command)
