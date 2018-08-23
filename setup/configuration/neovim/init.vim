@@ -10,6 +10,7 @@ call minpac#add('junegunn/fzf')
 call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-dispatch')
+call minpac#add('w0rp/ale')
 
 " Add optional plugins.
 
@@ -19,3 +20,17 @@ command! PackClean call minpac#clean()
 
 nnoremap <C-p> :<C-u>FZF<CR>
 set listchars=eol:¬,tab:>·,trail:·,extends:>,precedes:<,space:␣
+
+" For JavaScript files, use `eslint` (and only eslint).
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\ }
+
+" Leave ALE sign column on all the time.
+let g:ale_sign_column_always = 1
+
+" Mappings in the style of unimpaired-next.
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
