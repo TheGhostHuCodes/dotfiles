@@ -4,7 +4,7 @@ export_extensions() {
   cd "$(dirname "$0")" || exit 1
   echo "#!/usr/bin/env bash" > extensions.sh
   echo >> extensions.sh
-  code --list-extensions| xargs -L 1 echo code --install-extension >> extensions.sh
+  code --list-extensions| xargs -L 1 echo echo \"yes\" \| code --install-extension >> extensions.sh
   chmod +x extensions.sh
 }
 
