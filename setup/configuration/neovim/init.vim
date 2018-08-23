@@ -34,3 +34,23 @@ nmap <silent> [W <Plug>(ale_first)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
+
+" Preserve last search and cursor position after command.
+function! <SID>Preserve(command)
+    " Save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Execute command.
+    execute a:command
+    " Restore previous search history, and cursor position.
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" Automatically remove trailing whitespace before saving.
+function! <SID>StripTrailingWhitespaces()
+    call <SID>Preserve("%s/\\s\\+$//e")
+endfunction
+" Whitelist of files that can have trailing whitespace removed.
+autocmd FileType c,cpp,haskell,java,markdown,php,ruby,python,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
