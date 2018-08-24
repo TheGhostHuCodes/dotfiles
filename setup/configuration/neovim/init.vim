@@ -22,6 +22,7 @@ command! PackClean call minpac#clean()
 
 nnoremap <C-p> :<C-u>FZF<CR>
 set listchars=eol:¬,tab:>·,trail:·,extends:>,precedes:<,space:␣
+let mapleader = ","
 
 " For JavaScript files, use `eslint` (and only eslint).
 let g:ale_linters = {
