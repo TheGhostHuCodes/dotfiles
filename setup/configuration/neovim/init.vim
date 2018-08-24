@@ -6,6 +6,7 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Add plugins.
+call minpac#add('janko-m/vim-test')
 call minpac#add('junegunn/fzf')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('radenling/vim-dispatch-neovim')
@@ -45,6 +46,10 @@ nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 " Search for the current selection.
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
+
+" vim-test configuration.
+" Send results of tests to the quickfix list.
+let test#strategy = "dispatch"
 
 " Preserve last search and cursor position after command.
 function! <SID>Preserve(command)
