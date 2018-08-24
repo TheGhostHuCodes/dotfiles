@@ -6,7 +6,7 @@
 # dotdiff allows us to compare these files before deployment and merge any
 # local changes back into the repo before accidentally overwriting them.
 
-PAIRS=(
+pairs=(
   "../configuration/idea/ideavimrc:$HOME/.ideavimrc"
   "../configuration/inputrc:$HOME/.inputrc"
   "../configuration/neovim/init.vim:$HOME/.config/nvim/init.vim"
@@ -18,22 +18,44 @@ PAIRS=(
   "../templates/leiningen/profiles.clj.j2:$HOME/.lein/profiles.clj"
   "../templates/vscode/settings.json.j2:$HOME/Library/Application Support/Code/User/settings.json"
 )
+
 # Ensure script is executed relative to the script directory.
 cd "$(dirname "$0")" || exit 1
 
-for i in "${PAIRS[@]}"
+verbose=false
+while getopts ":hv" opt; do
+  case ${opt} in
+    h )
+      echo "Usage:"
+      echo "    dotdiff -h          Display this help message."
+      echo "    dotdiff -v          Display verbose logging."
+      exit 0
+      ;;
+    v ) verbose=true
+      ;;
+    \? )
+      echo  "Invalid Operation: -$OPTARG" 1>&2
+      exit 1
+      ;;
+  esac
+done
+
+for i in "${pairs[@]}"
 do
   # Read each pair into its own array, splitting on colon.
-  IFS=':' read -ra PAIR <<< "$i"
-  FST="${PAIR[0]}"
-  SND="${PAIR[1]}"
-  echo "Comparing $FST to $SND"
-  if cmp --quiet "$FST" "$SND"; then
-    printf "FILES UNCHANGED\\n\\n"
+  IFS=':' read -ra pair <<< "$i"
+  fst="${pair[0]}"
+  snd="${pair[1]}"
+  if cmp --quiet "$fst" "$snd"; then
+    if [ "$verbose" = true ] ; then
+      echo "Comparing $fst to $snd"
+      printf "FILES UNCHANGED\\n\\n"
+    fi
   else
+    echo "Comparing $fst to $snd"
     printf "#%.0s" {1..80}
     printf "\\n\\n"
-    colordiff -u "$FST" "$SND"
+    colordiff -u "$fst" "$snd"
     printf "\\n"
     printf "#%.0s" {1..80}
     printf "\\n"
