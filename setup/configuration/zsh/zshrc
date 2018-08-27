@@ -90,3 +90,8 @@ fi
 # aliases which should not be published, or only make sense from the context of
 # a particular machine.
 [ -f .local_aliases ] && source .local_aliases
+
+# Load .local_exports file if it exists. The .local_exports file contains
+# exports which should not be published, or only make sense from the context of
+# a particular machine.
+[ -f .local_exports ] && source .local_exports
