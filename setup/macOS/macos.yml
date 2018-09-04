@@ -144,6 +144,12 @@
       with_items:
         - node
 
+    - name: install exercism cli
+      homebrew: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - exercism
+
     - name: install databases
       homebrew: name={{ item }}
       update_homebrew: yes
