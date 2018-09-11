@@ -52,6 +52,15 @@ xmap gs <plug>(GrepperOperator)
 " Send results of tests to the quickfix list.
 let test#strategy = "dispatch"
 
+" Meovim terminal mode settings.
+if has('nvim')
+    " Remap Terminal mode escape to <leader><Esc>.
+    tnoremap <leader><Esc> <C-\><C-n>
+    " Highlight terminal cursor position inside and outside of Terminal mode.
+    highlight! link TermCursor Cursor
+    highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
+endif
+
 " Preserve last search and cursor position after command.
 function! <SID>Preserve(command)
     " Save last search, and cursor position.
