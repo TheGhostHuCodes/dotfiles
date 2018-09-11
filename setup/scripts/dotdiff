@@ -23,15 +23,19 @@ pairs=(
 cd "$(dirname "$0")" || exit 1
 
 verbose=false
-while getopts ":hv" opt; do
+merge=false
+while getopts ":hvm" opt; do
   case ${opt} in
     h )
       echo "Usage:"
       echo "    dotdiff -h          Display this help message."
       echo "    dotdiff -v          Display verbose logging."
+      echo "    dotdiff -m          Merge files using meld."
       exit 0
       ;;
     v ) verbose=true
+      ;;
+    m ) merge=true
       ;;
     \? )
       echo  "Invalid Operation: -$OPTARG" 1>&2
@@ -59,5 +63,9 @@ do
     printf "\\n"
     printf "#%.0s" {1..80}
     printf "\\n"
+    if [ "$merge" = true ] ; then
+      echo "Merging $fst into $snd"
+      meld "$fst" "$snd"
+    fi
   fi
 done
