@@ -96,6 +96,7 @@
       with_items:
         - leiningen
         - bazel
+        - upx
 
     - name: generate leiningen profiles.clj file
       template:
