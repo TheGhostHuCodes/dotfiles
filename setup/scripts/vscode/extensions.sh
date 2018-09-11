@@ -11,4 +11,5 @@ echo "yes" | code --install-extension ms-python.python
 echo "yes" | code --install-extension ms-vscode.Go
 echo "yes" | code --install-extension PeterJausovec.vscode-docker
 echo "yes" | code --install-extension stkb.rewrap
+echo "yes" | code --install-extension streetsidesoftware.code-spell-checker
 echo "yes" | code --install-extension vscodevim.vim
