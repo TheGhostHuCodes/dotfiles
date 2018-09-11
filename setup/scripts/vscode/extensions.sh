@@ -9,5 +9,6 @@ echo "yes" | code --install-extension mauve.terraform
 echo "yes" | code --install-extension mike-lischke.vscode-antlr4
 echo "yes" | code --install-extension ms-python.python
 echo "yes" | code --install-extension ms-vscode.Go
+echo "yes" | code --install-extension PeterJausovec.vscode-docker
 echo "yes" | code --install-extension stkb.rewrap
 echo "yes" | code --install-extension vscodevim.vim
