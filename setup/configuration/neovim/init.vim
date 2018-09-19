@@ -52,7 +52,7 @@ xmap gs <plug>(GrepperOperator)
 " Send results of tests to the quickfix list.
 let test#strategy = "dispatch"
 
-" Meovim terminal mode settings.
+" Neovim terminal mode settings.
 if has('nvim')
     " Remap Terminal mode escape to <leader><Esc>.
     tnoremap <leader><Esc> <C-\><C-n>
