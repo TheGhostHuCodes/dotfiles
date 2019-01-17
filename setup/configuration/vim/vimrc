@@ -213,6 +213,9 @@ set statusline+=\ (%p%%)    " Current % in file.
 " FileType-specific settings {{{
 " Html {{{
     augroup filetype_html
+        set tabstop=2
+        set shiftwidth=2
+        set expandtab
         autocmd!
         autocmd filetype html nnoremap <buffer> <localleader>f vatzf
         setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
