@@ -21,6 +21,8 @@ filetype plugin indent on
 " }}}
 
 " Basic Settings {{{
+if has ("OSX")
+endif
 if has ("win32")
     " Making gvim legible on 4k screens.
     set guifont=Consolas:h12
@@ -35,6 +37,7 @@ set vb t_vb=
 " Turn on Solarized color scheme.
 syntax on
 set background=dark
+let g:solarized_termtrans=1
 colorscheme solarized
 set foldlevelstart=0
 set tabstop=4
@@ -113,6 +116,8 @@ nnoremap Q gqap
 " clangformat
 noremap <leader>R :pyf /usr/local/bin/clang-format.py<cr>
 inoremap <leader>R <c-o>:pyf /usr/local/bin/clang-format.py<cr>
+" yapf
+autocmd FileType python nnoremap <leader>y :0,$!yapf<cr>
 " Toggle spell checking.
 nnoremap <f7> :setlocal spell! spelllang=en_us<cr>
 " Toggle local line numbers and relative line numbers.
@@ -220,7 +225,7 @@ set statusline+=\ (%p%%)    " Current % in file.
         autocmd filetype cpp setlocal foldmethod=syntax
     augroup end
 " }}}
-"
+
 " Python {{{
     augroup filetype_python
         " yapf
