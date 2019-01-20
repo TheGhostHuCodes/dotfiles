@@ -62,6 +62,19 @@ if has('nvim')
     highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
 endif
 
+" Neovim window switching. Note on MacOS this requires you to set the Option
+" key to Esc+ under Preferences -> Profiles -> Text
+nnoremap <M-h> <c-w>h
+nnoremap <M-j> <c-w>j
+nnoremap <M-k> <c-w>k
+nnoremap <M-l> <c-w>l
+if has('nvim')
+    tnoremap <M-h> <c-\><c-n><c-w>h
+    tnoremap <M-j> <c-\><c-n><c-w>j
+    tnoremap <M-k> <c-\><c-n><c-w>k
+    tnoremap <M-l> <c-\><c-n><c-w>l
+endif
+
 " Preserve last search and cursor position after command.
 function! <SID>Preserve(command)
     " Save last search, and cursor position.
