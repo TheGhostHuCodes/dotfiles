@@ -81,7 +81,7 @@
         - antlr
         - protobuf
 
-    # java 8 is a dependency for swagger-codegen and bazel.
+    # java 8 is a dependency for swagger-codegen, bazel, and TLA+ toolbox.
     - name: install java8
       homebrew_cask: name={{ item }}
       update_homebrew: yes
@@ -108,6 +108,12 @@
         - leiningen
         - bazel
         - upx
+
+    - name: install TLA+ toolbox
+      homebrew_cask: name={{ item }}
+      update_homebrew: yes
+      with_items:
+        - tla-plus-toolbox
 
     - name: generate leiningen profiles.clj file
       template:
