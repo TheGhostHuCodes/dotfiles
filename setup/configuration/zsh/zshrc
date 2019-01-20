@@ -63,9 +63,6 @@ if [[ $(uname) = 'Linux' ]]; then
     export PATH="$PATH:${HOME}/.local/bin"
 fi
 if [[ $(uname) = 'Darwin' ]]; then
-    # Miniconda setup
-    export PATH="$PATH":/usr/local/miniconda3/bin
-    . /usr/local/miniconda3/etc/profile.d/conda.sh
     # pip3 install --user installs to a special directory that needs to be put
     # into the PATH.
     export PATH="$PATH:${HOME}/Library/Python/3.6/bin"
@@ -95,3 +92,6 @@ fi
 # exports which should not be published, or only make sense from the context of
 # a particular machine.
 [ -f .local_exports ] && source .local_exports
+
+# Use pyenv to define python version within projects.
+eval "$(pyenv init -)"

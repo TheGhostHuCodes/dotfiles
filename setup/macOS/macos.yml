@@ -118,18 +118,13 @@
         - cabal-install
         - stack
 
-    - name: install miniconda3
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
-      with_items:
-        - miniconda
-
     - name: install python3 and tooling
       homebrew: name={{ item }}
       update_homebrew: yes
       with_items:
         - python3
         - pipenv
+        - pyenv
 
     - name: install python3 neovim provider and tools
       pip:
