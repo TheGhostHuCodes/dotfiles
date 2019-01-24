@@ -1,1 +1,5 @@
+# macOS metadata files
+.DS_Store
+
+# Editor and IDE metadata
 *.swp
