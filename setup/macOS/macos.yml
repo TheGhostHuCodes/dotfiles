@@ -34,6 +34,7 @@
         - colordiff
         - mosh
         - ripgrep
+        - p7zip
 
     - name: install desktop usability applications
       homebrew_cask: name={{ item }}
