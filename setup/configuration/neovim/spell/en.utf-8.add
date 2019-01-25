@@ -11,3 +11,6 @@ serverless
 templatizing
 Dockerfile
 vscode
+SQLAlchemy
+sqlalchemy
+kubernetes
