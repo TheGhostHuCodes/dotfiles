@@ -93,5 +93,7 @@ fi
 # a particular machine.
 [ -f .local_exports ] && source .local_exports
 
-# Use pyenv to define python version within projects.
-eval "$(pyenv init -)"
+# Use pyenv to define python version within projects if available.
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
