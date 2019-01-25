@@ -44,6 +44,7 @@
         - keepassx
         - spectacle
         - flux
+        - osxfuse
         - veracrypt
 
     - name: install version control tools
