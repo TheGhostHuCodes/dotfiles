@@ -5,10 +5,11 @@
     - user_vars.yml
   tasks:
     - name: install prerequisite tools
-      apt: pkg={{ item }} update_cache=yes
+      apt:
+        update_cache: yes
+        name:
+          - curl
       become: True
-      with_items:
-        - curl
 
     - name: add microsoft signing key
       shell: curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
@@ -19,64 +20,99 @@
       become: True
 
     - name: install terminal tools
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - zsh
+          - neovim
+          - tmux
+          - tree
+          - libgnome2-0
+          - whois
+          - silversearcher-ag
+          - wget
+          - mkdocs
       become: True
-      with_items:
-        - zsh
-        - vim-gnome-py2
-        - tmux
-        - tree
-        - libgnome2-0
-        - whois
-        - silversearcher-ag
-        - wget
-        - mkdocs
 
     - name: install desktop usability applications
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - chromium-browser
+          - gnome-tweak-tool
+          - keepassx
       become: True
-      with_items:
-        - chromium-browser
-        - gnome-tweak-tool
-        - keepassx
 
     - name: install version control tools
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - git
+          - openssh-server
       become: True
-      with_items:
-        - git
-        - openssh-server
 
     - name: install developer tools
-      apt: pkg={{ item }} update_cache=yes
+      apt:
+        update_cache: yes
+        name:
+          - code
       become: True
-      with_items:
-        - code
 
     - name: install golang
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - golang-1.9
       become: True
-      with_items:
-        - golang-1.9
 
-    - name: install pip3
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+    - name: install pyenv dependencies
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - make
+          - build-essential
+          - libssl-dev
+          - zlib1g-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - llvm
+          - libncurses5-dev
+          - libncursesw5-dev
+          - xz-utils
+          - tk-dev
+          - libffi-dev
+          - liblzma-dev
+          - python-openssl
       become: True
-      with_items:
-        - python3-pip
 
-    - name: install pipenv
-      pip:
-        executable: pip3
-        name: pipenv
-        extra_args: --user
+    - name: install pyenv
+      shell: curl https://pyenv.run | bash
+
+    - name: install python 3.7.2 and set as global
+      shell: export PATH="$PATH:${HOME}/.pyenv/bin" && pyenv install 3.7.2 && pyenv global 3.7.2
+
+    - name: install C++ tools
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - clang
+      become: True
 
     - name: install tools for building unison
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - ocaml
+          - liblablgtk2-ocaml-dev
       become: True
-      with_items:
-        - ocaml
-        - liblablgtk2-ocaml-dev
 
     - name: make directory for antigen install
       file: path=/usr/local/share/antigen state=directory
@@ -88,9 +124,9 @@
         dest: /usr/local/share/antigen/antigen.zsh
       become: True
 
-    - name: generate .zshrc file
+    - name: deploy .zshrc file
       template:
-        src: ../templates/zsh/zshrc.j2
+        src: ../configuration/zsh/zshrc
         dest: ~/.zshrc
 
     - name: generate .gitconfig file

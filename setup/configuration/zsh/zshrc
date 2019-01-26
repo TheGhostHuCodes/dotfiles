@@ -94,6 +94,9 @@ fi
 [ -f .local_exports ] && source .local_exports
 
 # Use pyenv to define python version within projects if available.
+if [[ $(uname) = 'Linux' ]]; then
+    export PATH="$PATH:${HOME}/.pyenv/bin"
+fi
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
