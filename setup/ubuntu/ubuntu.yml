@@ -92,10 +92,10 @@
       become: True
 
     - name: install pyenv
-      shell: curl https://pyenv.run | bash
+      shell: command -v pyenv > /dev/null 2>&1 || curl https://pyenv.run | bash
 
     - name: install python 3.7.2 and set as global
-      shell: export PATH="$PATH:${HOME}/.pyenv/bin" && pyenv install 3.7.2 && pyenv global 3.7.2
+      shell: export PATH="$PATH:${HOME}/.pyenv/bin" && pyenv install --skip-existing 3.7.2 && pyenv global 3.7.2
 
     - name: install C++ tools
       apt:
