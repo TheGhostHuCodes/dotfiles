@@ -103,6 +103,7 @@
         cache_valid_time: 3600
         name:
           - clang
+          - clang-format
           - cmake
       become: True
 
