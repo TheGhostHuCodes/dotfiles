@@ -140,6 +140,11 @@
         src: ../templates/git/gitconfig.j2
         dest: ~/.gitconfig
 
+    - name: generate .tmux.conf file
+      template:
+        src: ../templates/tmux/tmux.conf.j2
+        dest: ~/.tmux.conf
+
     - name: change default shell from bash to zsh
       shell: sed -i "/{{ lookup('env', 'USER') }}/s/bash/zsh/g" /etc/passwd
       become: True
