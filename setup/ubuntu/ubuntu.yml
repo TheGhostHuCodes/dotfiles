@@ -107,6 +107,10 @@
           - cmake
       become: True
 
+    - name: install C++ package manager
+      pip:
+        name: conan
+
     - name: install tools for building unison
       apt:
         update_cache: yes
