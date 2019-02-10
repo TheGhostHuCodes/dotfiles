@@ -147,3 +147,31 @@
       template:
         src: ../templates/tmux/tmux.conf.j2
         dest: ~/.tmux.conf
+
+    - name: Creates neovim configuration directory
+      file:
+        path: ~/.config/nvim
+        state: directory
+        mode: 0755
+
+    - name: deploy neovim init.vim file
+      copy:
+        src: ../configuration/neovim/init.vim
+        dest: ~/.config/nvim/init.vim
+
+    - name: install minpac
+      git:
+        repo: 'https://github.com/k-takata/minpac.git'
+        dest: ~/.config/nvim/pack/minpac/opt/minpac
+        update: no
+
+    - name: Creates neovim spell directory
+      file:
+        path: ~/.config/nvim/spell
+        state: directory
+        mode: 0755
+
+    - name: deploy neovim spellfile
+      copy:
+        src: ../configuration/neovim/spell/en.utf-8.add
+        dest: ~/.config/nvim/spell/en.utf-8.add

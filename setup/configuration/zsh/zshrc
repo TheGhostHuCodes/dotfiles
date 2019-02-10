@@ -40,10 +40,8 @@ _has() {
 
 ################################################################################
 
-# vim aliases
-if [[ $(uname) = 'Darwin' ]]; then
-    alias vi='nvim'
-fi
+# use neovim
+alias vi='nvim'
 
 # Go development
 export GOPATH="${HOME}/repos/go"
