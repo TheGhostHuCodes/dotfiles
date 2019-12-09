@@ -138,6 +138,11 @@
     - name: install C++ package manager
       shell: zsh -c "source ~/.zshrc && pip install conan"
 
+    - name: deploy .inputrc file
+      template:
+        src: ../configuration/inputrc
+        dest: ~/.inputrc
+
     - name: generate .gitconfig file
       template:
         src: ../templates/git/gitconfig.j2
