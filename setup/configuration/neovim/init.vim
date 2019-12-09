@@ -94,3 +94,16 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 " Whitelist of files that can have trailing whitespace removed.
 autocmd FileType c,cpp,haskell,java,markdown,php,ruby,python,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+" FileType-specific settings {{{
+" Shell {{{
+    augroup filetype_sh
+        set tabstop=4
+        set shiftwidth=4
+        set expandtab
+        autocmd!
+        autocmd filetype sh nnoremap <buffer> <localleader>f vatzf
+        setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    augroup END
+" }}}
+" }}}
