@@ -261,6 +261,12 @@
         src: ../configuration/neovim/init.vim
         dest: ~/.config/nvim/init.vim
 
+    - name: install minpac
+      git:
+        repo: 'https://github.com/k-takata/minpac.git'
+        dest: ~/.config/nvim/pack/minpac/opt/minpac
+        update: no
+
     - name: Creates neovim spell directory
       file:
         path: ~/.config/nvim/spell
