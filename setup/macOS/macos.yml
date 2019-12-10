@@ -5,17 +5,18 @@
     - user_vars.yml
   tasks:
     - name: install prerequisite tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - curl
 
     - name: install terminal tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
-        - zsh
-        - antigen
+        - fish
         - macvim
         - neovim
         - tmux
@@ -36,17 +37,28 @@
         - mosh
         - ripgrep
         - p7zip
+        - xz
+
+    - name: add fish to known shells
+      shell: grep -qxF '/usr/local/bin/fish' /etc/shells || echo '/usr/local/bin/fish' >> /etc/shells
+      become: True
+
+    - name: deploy fish user key bindings
+      copy:
+        src: ../configuration/fish/functions/fish_user_key_bindings.fish
+        dest: ~/.config/fish/functions/fish_user_key_bindings.fish
 
     - name: install fonts
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew_cask:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - font-fira-code
         - font-source-code-pro
 
     - name: install desktop usability applications
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew_cask:
+        name: ["{{ item }}"]
       with_items:
         - google-chrome
         - keepassx
@@ -56,14 +68,16 @@
         - veracrypt
 
     - name: install version control tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - git
 
     - name: install developer tool binaries
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew_cask:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - iterm2
         - visual-studio-code
@@ -74,43 +88,49 @@
         - meld
 
     - name: install developer tool packages
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - antlr
         - protobuf
 
     # java 8 is a dependency for swagger-codegen, bazel, and TLA+ toolbox.
     - name: install java8
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew_cask:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - java8
 
     - name: install java build tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - maven
         - gradle
 
     - name: install swagger-codegen
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - swagger-codegen
 
     - name: install developer build tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - leiningen
         - bazel
         - upx
 
     - name: install TLA+ toolbox
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew_cask:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - tla-plus-toolbox
 
@@ -120,23 +140,26 @@
         dest: ~/.lein/profiles.clj
 
     - name: install golang and tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - golang
         - dep
 
     - name: install Haskell and tools
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - ghc
         - cabal-install
         - stack
 
     - name: install python3 and tooling
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - python3
         - pipenv
@@ -151,38 +174,44 @@
         extra_args: --user
 
     - name: install node and npm
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - node
 
     - name: install exercism cli
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - exercism
 
     - name: install databases
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - postgresql
 
     - name: install docker
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew_cask:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - docker
 
     - name: install minikube
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - minikube
 
     - name: install kubectl
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - kubernetes-cli
 
@@ -192,8 +221,9 @@
         dest: ~/.vim/bundle/Vundle.vim
 
     - name: install productivity tools
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
+      homebrew_cask:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - rescuetime
 
@@ -206,11 +236,6 @@
       copy:
         src: ../configuration/idea/ideavimrc
         dest: ~/.ideavimrc
-
-    - name: deploy .zshrc file
-      template:
-        src: ../configuration/zsh/zshrc
-        dest: ~/.zshrc
 
     - name: deploy .inputrc file
       template:
@@ -233,14 +258,15 @@
         dest: ~/.tmux-osx.conf
 
     - name: Install fzf
-      homebrew: name={{ item }}
-      update_homebrew: yes
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
       with_items:
         - fzf
 
     - name: Configure fzf
       # yes | [command] seems to cause ansible to hang.
-      shell: echo "y\ny\ny\n" | $(brew --prefix)/opt/fzf/install --no-bash --no-fish
+      shell: echo "y\ny\ny\n" | $(brew --prefix)/opt/fzf/install --no-bash --no-zsh
 
     - name: Creates vscode user directory
       file:

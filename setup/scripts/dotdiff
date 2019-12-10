@@ -7,6 +7,7 @@
 # local changes back into the repo before accidentally overwriting them.
 
 pairs=(
+  "../configuration/fish/functions/fish_user_key_bindings.fish:$HOME/.config/fish/functions/fish_user_key_bindings.fish"
   "../configuration/idea/ideavimrc:$HOME/.ideavimrc"
   "../configuration/inputrc:$HOME/.inputrc"
   "../configuration/neovim/init.vim:$HOME/.config/nvim/init.vim"
