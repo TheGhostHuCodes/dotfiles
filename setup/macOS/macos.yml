@@ -42,7 +42,6 @@
       update_homebrew: yes
       with_items:
         - font-fira-code
-        - font-m-plus
         - font-source-code-pro
 
     - name: install desktop usability applications
