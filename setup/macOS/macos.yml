@@ -166,14 +166,7 @@
       homebrew: name={{ item }}
       update_homebrew: yes
       with_items:
-        - mongodb
         - postgresql
-
-    - name: install database tool binaries
-      homebrew_cask: name={{ item }}
-      update_homebrew: yes
-      with_items:
-        - mongodb-compass
 
     - name: install docker
       homebrew_cask: name={{ item }}
