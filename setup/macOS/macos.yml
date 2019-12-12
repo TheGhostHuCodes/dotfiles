@@ -17,13 +17,11 @@
         update_homebrew: yes
       with_items:
         - fish
-        - macvim
         - neovim
         - tmux
         - reattach-to-user-namespace
         - tree
         - whois
-        - ag
         - wget
         - mkdocs
         - shellcheck
@@ -43,10 +41,26 @@
       shell: grep -qxF '/usr/local/bin/fish' /etc/shells || echo '/usr/local/bin/fish' >> /etc/shells
       become: True
 
+    - name: Creates fish configuration directory
+      file:
+        path: ~/.config/fish/functions/
+        state: directory
+        mode: 0755
+
     - name: deploy fish user key bindings
       copy:
         src: ../configuration/fish/functions/fish_user_key_bindings.fish
         dest: ~/.config/fish/functions/fish_user_key_bindings.fish
+
+    - name: deploy config.fish
+      copy:
+        src: ../configuration/fish/config.fish
+        dest: ~/.config/fish/config.fish
+
+    - name: install font brew tap
+      homebrew_tap:
+        name: homebrew/cask-fonts
+        state: present
 
     - name: install fonts
       homebrew_cask:
@@ -67,13 +81,6 @@
         - osxfuse
         - veracrypt
 
-    - name: install version control tools
-      homebrew:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - git
-
     - name: install developer tool binaries
       homebrew_cask:
         name: ["{{ item }}"]
@@ -92,52 +99,7 @@
         name: ["{{ item }}"]
         update_homebrew: yes
       with_items:
-        - antlr
         - protobuf
-
-    # java 8 is a dependency for swagger-codegen, bazel, and TLA+ toolbox.
-    - name: install java8
-      homebrew_cask:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - java8
-
-    - name: install java build tools
-      homebrew:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - maven
-        - gradle
-
-    - name: install swagger-codegen
-      homebrew:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - swagger-codegen
-
-    - name: install developer build tools
-      homebrew:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - leiningen
-        - bazel
-        - upx
-
-    - name: install TLA+ toolbox
-      homebrew_cask:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - tla-plus-toolbox
-
-    - name: generate leiningen profiles.clj file
-      template:
-        src: ../templates/leiningen/profiles.clj.j2
-        dest: ~/.lein/profiles.clj
 
     - name: install golang and tools
       homebrew:
@@ -145,16 +107,13 @@
         update_homebrew: yes
       with_items:
         - golang
-        - dep
 
     - name: install Haskell and tools
       homebrew:
         name: ["{{ item }}"]
         update_homebrew: yes
       with_items:
-        - ghc
-        - cabal-install
-        - stack
+        - haskell-stack
 
     - name: install python3 and tooling
       homebrew:
@@ -162,7 +121,6 @@
         update_homebrew: yes
       with_items:
         - python3
-        - pipenv
         - pyenv
 
     - name: install python3 neovim provider and tools
@@ -173,33 +131,19 @@
           - neovim-remote
         extra_args: --user
 
-    - name: install node and npm
-      homebrew:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - node
-
-    - name: install exercism cli
-      homebrew:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - exercism
-
-    - name: install databases
-      homebrew:
-        name: ["{{ item }}"]
-        update_homebrew: yes
-      with_items:
-        - postgresql
-
     - name: install docker
       homebrew_cask:
         name: ["{{ item }}"]
         update_homebrew: yes
       with_items:
         - docker
+
+    - name: install docker-compose
+      homebrew:
+        name: ["{{ item }}"]
+        update_homebrew: yes
+      with_items:
+        - docker-compose
 
     - name: install minikube
       homebrew:
@@ -215,27 +159,12 @@
       with_items:
         - kubernetes-cli
 
-    - name: install Vundle the vim bundle manager
-      git:
-        repo: 'https://github.com/VundleVim/Vundle.vim.git'
-        dest: ~/.vim/bundle/Vundle.vim
-
     - name: install productivity tools
       homebrew_cask:
         name: ["{{ item }}"]
         update_homebrew: yes
       with_items:
         - rescuetime
-
-    - name: deploy .vimrc file
-      copy:
-        src: ../configuration/vim/vimrc
-        dest: ~/.vimrc
-
-    - name: deploy .ideavimrc file
-      copy:
-        src: ../configuration/idea/ideavimrc
-        dest: ~/.ideavimrc
 
     - name: deploy .inputrc file
       template:
