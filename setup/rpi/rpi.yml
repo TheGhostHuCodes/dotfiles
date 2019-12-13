@@ -1,0 +1,98 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - user_vars.yml
+  tasks:
+    - name: install prerequisite tools
+      apt:
+        update_cache: yes
+        name:
+          - curl
+      become: True
+
+    - name: install terminal tools
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - neovim
+          - tmux
+          - tree
+          - whois
+          - silversearcher-ag
+          - wget
+          - fish
+      become: True
+
+    - name: install pyenv dependencies
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name:
+          - make
+          - build-essential
+          - libssl-dev
+          - zlib1g-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - llvm
+          - libncurses5-dev
+          - libncursesw5-dev
+          - xz-utils
+          - tk-dev
+          - libffi-dev
+          - liblzma-dev
+          - python-openssl
+      become: True
+
+    - name: change default shell from bash to fish
+      shell: sed -i "/{{ lookup('env', 'USER') }}/s/\/bin\/bash/\/usr\/bin\/fish/g" /etc/passwd
+      become: True
+
+    - name: deploy config.fish file
+      copy:
+        src: ../configuration/fish/config.fish
+        dest: ~/.config/fish/config.fish
+
+    - name: install pyenv
+      shell: command -v pyenv > /dev/null 2>&1 || curl https://pyenv.run | bash
+
+    - name: generate .gitconfig file
+      template:
+        src: ../templates/git/gitconfig.j2
+        dest: ~/.gitconfig
+
+    - name: generate .tmux.conf file
+      template:
+        src: ../templates/tmux/tmux.conf.j2
+        dest: ~/.tmux.conf
+
+    - name: Creates neovim configuration directory
+      file:
+        path: ~/.config/nvim
+        state: directory
+        mode: 0755
+
+    - name: deploy neovim init.vim file
+      copy:
+        src: ../configuration/neovim/init.vim
+        dest: ~/.config/nvim/init.vim
+
+    - name: install minpac
+      git:
+        repo: 'https://github.com/k-takata/minpac.git'
+        dest: ~/.config/nvim/pack/minpac/opt/minpac
+        update: no
+
+    - name: Creates neovim spell directory
+      file:
+        path: ~/.config/nvim/spell
+        state: directory
+        mode: 0755
+
+    - name: deploy neovim spellfile
+      copy:
+        src: ../configuration/neovim/spell/en.utf-8.add
+        dest: ~/.config/nvim/spell/en.utf-8.add
