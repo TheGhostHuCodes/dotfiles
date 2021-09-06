@@ -1,114 +1,182 @@
-# zsh Antigen setup
-source /usr/local/share/antigen/antigen.zsh
+#!/bin/zsh
 
-antigen use oh-my-zsh
+# Zsh reads configuration files in this order:
+#   1. .zshenv - Should only contain user’s environment variables.
+#   2. .zprofile - Can be used to execute commands just after logging in.
+# >>3. .zshrc - Should be used for the shell configuration and for executing commands.
+#   4. .zlogin - Same purpose than .zprofile, but read just after .zshrc.
+#   5. .zlogout - Can be used to execute commands when a shell exit.
 
-antigen bundle git
-antigen bundle z
+# On macOS /etc/zshrc overwrites the following environment variables so they
+# need to be placed here instead of in ~/.zshenv to take them back.
+#
+# Path of the history file.
+export HISTFILE="$ZDOTDIR/.zsh_history"
+# Indicates how many commands from your history file are loaded into the
+# shell’s memory.
+export HISTSIZE=100000
+# Indicates how many commands your history file can hold. You want this equal
+# or larger than $HISTSIZE
+export SAVEHIST=100000
 
-# Add cool substring searching using vim key bindings
-antigen bundle zsh-users/zsh-history-substring-search
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+# +-----------------------+
+# | History Configuration |
+# +-----------------------+
 
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle docker
-antigen bundle psprint/zsh-navigation-tools
+# There is both a history list stored in memory, and a history file persisted
+# on disk. These two things are different and some of the configuration below
+# only configures one or the other.
+#
+# This option both imports new commands from the history file, and also causes
+# your typed commands to be appended to the history file.
+setopt SHARE_HISTORY
+# If a new command line being added to the history list duplicates an older
+# one, the older command is removed from the list (even if it is not the
+# previous event).
+setopt HIST_IGNORE_ALL_DUPS
+# Do not write a duplicate event to the history file.
+setopt HIST_SAVE_NO_DUPS
 
-antigen theme sorin
+# +---------------------+
+# | Autocomplete System |
+# +---------------------+
 
-if [[ $(uname) = 'Darwin' ]]; then
-    antigen bundle brew
-fi
+autoload -U compinit; compinit
+# On an ambiguous completion, instead of listing possibilities or beeping,
+# insert the first match immediately. Then when completion is requested again,
+# remove the first match and insert the second match, etc. When there are no
+# more matches, go back to the first one again
+setopt MENU_COMPLETE
 
-antigen apply
+# +-----------------+
+# | Directory Stack |
+# +-----------------+
 
+# Make the cd push the current directory onto the directory stack when changing
+# directories.
+setopt AUTO_PUSHD
+# Don’t push multiple copies of the same directory onto the directory stack.
+setopt PUSHD_IGNORE_DUPS
+# Do not print the directory stack after pushd or popd.
+setopt PUSHD_SILENT
+
+# The dirs command prints the contents of the directory stack. The -v switch
+# numbers the directories in the stack when printing.
+alias d='dirs -v'
+# Creates an alias for the integers 1-9 to map to the command `cd +n` where n
+# is an integer. This form of cd extracts an entry from the directory stack,
+# and changes to that directory.
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# +----------------------+
+# | Version Control Info |
+# +----------------------+
+
+# https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Version-Control-Information
+# https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh
+
+autoload -Uz vcs_info
+# There is no point in running the code to detect version control systems you
+# do not use. Instead just enable the ones that you do use.
+zstyle ':vcs_info:*' enable git
+precmd_vcs_info() { vcs_info }
+# An array of hook functions that is executed before each prompt. Normally, a
+# hook function named precmd would be executed before each prompt. Because we
+# define an array precmd_functions here and append a function name, the precmd
+# hook function will be executed followed by all the functions that are named
+# in the precmd_functions array. 
+precmd_functions+=( precmd_vcs_info )
+
+# Format substations within git:
+# %b => current branch
+# %a => current action (rebase/merge)
+#
+# Note that there is format collision for %b within git and within a prompt. To
+# signify a prompt %b here you need use %%b.
+#
+# See Terminal Prompt section for Format substitutions within prompts.
+
+# General git format string, which is usually most of the time.
+zstyle ':vcs_info:git:*' formats ' %F{blue}⎇ %b%f'
+# git format string for actions such as when you are rebasing or merging.
+zstyle ':vcs_info:git:*' actionformats ' %F{blue}⎇ %b%f|%F{red}%a%f'
+
+# +-----------------+
+# | Terminal Prompt |
+# +-----------------+
+
+# If set, parameter expansion, command substitution, and arithmetic expansion
+# are performed in prompts.
+setopt PROMPT_SUBST
+
+# *NOTE:* Never use double quotes for PROMPT and RPROMPT strings. A prompt
+# string using double quotes will be evaluated once when your shell initializes
+# and never re-evaluated again.
+
+# Format substations within prompt:
+# %F => color selection
+# %f => reset color
+# %<N>~ => current path, will limit the number of directories to the last N.
+# %B => bold
+# %b => reset bold 
+# %U => underline
+# %u => reset underline
+# %(?..) => prompt conditional - %(condition.true.false)
+# %? => return status of the last command executed just before the prompt.
+
+PROMPT=$'%F{green}%2~%B%(?.%F{green}.%F{red} %U%?%u💥)❯%f%b '
+#                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Turns chevron red and prepends
+#                      the exit code and an explosion if last command fails.
+#                 ^^^ %<N>~ will limit the number of path segments leading up
+#                 to the current directory to N. The ~ signifies tilde
+#                 contraction so the displayed path will be relative to the
+#                 user home directory.
+
+# Prompt as defined in version control info section.
+RPROMPT='${vcs_info_msg_0_}'
+
+# +-------------+
+# | vi Bindings |
+# +-------------+
+
+# Turns on vi key-bindings within Zsh.
 bindkey -v
+# Makes switching between vi modes faster.
+export KEYTIMEOUT=1
 
-# Set terminal to UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+# The history search shortcut is unbound when using vi mode in Zsh. The -M
+# <keymap> switch tells bindkey which keymap to apply the binding to. We apply
+# backwards and forward history searching in both the vi cmd and ins modes.
+bindkey -M vicmd '/' history-incremental-pattern-search-backward
+bindkey -M vicmd '?' history-incremental-pattern-search-forward
+bindkey -M viins '^R' history-incremental-pattern-search-backward
+bindkey -M viins '^F' history-incremental-pattern-search-forward
 
-# Internal utility functions ###################################################
+# A visual indicator to show the current mode (NORMAL or INSERT). The NORMAL
+# mode cursor is a block, and the INSERT mode cursor is a beam.
+cursor_mode() {
+    # See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursor shapes
+    cursor_block='\e[2 q'
+    cursor_beam='\e[6 q'
 
-# Returns whether the given command is executable or aliased.
-_has() {
-    return $( whence $1 >/dev/null )
+    function zle-keymap-select {
+        if [[ ${KEYMAP} == vicmd ]] ||
+            [[ $1 = 'block' ]]; then
+            echo -ne $cursor_block
+        elif [[ ${KEYMAP} == main ]] ||
+            [[ ${KEYMAP} == viins ]] ||
+            [[ ${KEYMAP} = '' ]] ||
+            [[ $1 = 'beam' ]]; then
+            echo -ne $cursor_beam
+        fi
+    }
+
+    zle-line-init() {
+        echo -ne $cursor_beam
+    }
+
+    zle -N zle-keymap-select
+    zle -N zle-line-init
 }
 
-################################################################################
-
-# vim aliases
-if [[ $(uname) = 'Darwin' ]]; then
-    alias vi='nvim'
-fi
-
-# Go development
-export GOPATH="${HOME}/repos/go"
-if [[ $(uname) = 'Darwin' ]]; then
-    export GOROOT="$(brew --prefix golang)/libexec"
-fi
-if [[ $(uname) = 'Linux' ]]; then
-    export GOROOT="/usr/lib/go-1.9"
-fi
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-# Make directories if they do not exist.
-test -d "${GOPATH}" || mkdir -p "${GOPATH}"
-test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
-
-# Python development
-if [[ $(uname) = 'Linux' ]]; then
-    export PATH="$PATH:${HOME}/.local/bin"
-fi
-if [[ $(uname) = 'Darwin' ]]; then
-    # pip3 install --user installs to a special directory that needs to be put
-    # into the PATH.
-    export PATH="$PATH:${HOME}/Library/Python/3.6/bin"
-fi
-
-# Groovy development
-if [[ $(uname) = 'Darwin' ]]; then
-    export GROOVY_HOME=/usr/local/opt/groovy/libexec
-fi
-
-# Add fzf to zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Configure fzf to use ag
-if _has fzf && _has ag; then
-    export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-fi
-
-# Load .local_aliases file if it exists. The .local_aliases file contains
-# aliases which should not be published, or only make sense from the context of
-# a particular machine.
-[ -f .local_aliases ] && source .local_aliases
-
-# Load .local_exports file if it exists. The .local_exports file contains
-# exports which should not be published, or only make sense from the context of
-# a particular machine.
-[ -f .local_exports ] && source .local_exports
-
-# Use pyenv to define python version within projects if available.
-if [[ $(uname) = 'Linux' ]]; then
-    export PATH="$PATH:${HOME}/.pyenv/bin"
-fi
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# Use nvm to manage multiple node versions.
-export NVM_DIR="$HOME/.nvm"
-# This loads nvm.
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
-# This loads nvm bash_completion.
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
-
-# Prepend gnubin to PATH. This includes homebrew make.
-if [[ $(uname) = 'Darwin' ]]; then
-    PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
-fi
+cursor_mode

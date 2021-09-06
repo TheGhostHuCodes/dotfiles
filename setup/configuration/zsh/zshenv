@@ -1,0 +1,57 @@
+#!/bin/zsh
+
+# Zsh reads configuration files in this order:
+# >>1. .zshenv - Should only contain user’s environment variables.
+#   2. .zprofile - Can be used to execute commands just after logging in.
+#   3. .zshrc - Should be used for the shell configuration and for executing commands.
+#   4. .zlogin - Same purpose than .zprofile, but read just after .zshrc.
+#   5. .zlogout - Can be used to execute commands when a shell exit.
+
+# macOS includes /etc/zprofile and /etc/zshrc files. The OS version of each
+# file is read first before the user version of the configuration so they may
+# clobber configuration set by previous user configuration files.
+
+# +-----+
+# | XDG |
+# +-----+
+#
+# Setting up the XDG Base directory environment variables. XDG stands for
+# Cross-Desktop Group.
+#
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+#
+# There is a single base directory relative to which user-specific
+# configuration files should be written. This directory is defined by the
+# environment variable $XDG_CONFIG_HOME.
+export XDG_CONFIG_HOME="$HOME/.config"
+# There is a single base directory relative to which user-specific
+# non-essential (cached) data should be written. This directory is defined by
+# the environment variable $XDG_CACHE_HOME.
+export XDG_CACHE_HOME="$HOME/.cache"
+# There is a single base directory relative to which user-specific data files
+# should be written. This directory is defined by the environment variable
+# $XDG_DATA_HOME.
+export XDG_DATA_HOME="$HOME/.local/share"
+# There is a single base directory relative to which user-specific state data
+# should be written. This directory is defined by the environment variable
+# $XDG_STATE_HOME.
+export XDG_CACHE_HOME="$HOME/.local/state"
+
+# +--------+
+# | Editor |
+# +--------+
+#
+# In the past $EDITOR and $VISUAL were used to defined editors that could work
+# without advanced terminal functionality and full screen editors, respectively.
+# These days this doesn't really matter, setting both to the same modern editor
+# is fine.
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# +-----+
+# | Zsh |
+# +-----+
+#
+# Directory where Zsh will look for user configuration files.
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
