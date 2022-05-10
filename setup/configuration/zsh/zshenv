@@ -54,4 +54,5 @@ export VISUAL="nvim"
 #
 # Directory where Zsh will look for user configuration files.
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
+# Use colorized terminal output.
+export CLICOLOR=1
