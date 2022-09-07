@@ -19,6 +19,10 @@ email = "yungjinhu@gmail.com"
 "zsh/zprofile" = "~/.config/zsh/.zprofile"
 "zsh/zshrc" = "~/.config/zsh/.zshrc"
 
+[fish.files]
+"fish/config.fish" = "~/.config/fish/config.fish"
+"fish/functions/fish_user_key_bindings.fish" = "~/.config/fish/functions/fish_user_key_bindings.fish"
+
 [tmux.files]
 # tmux does not respect XDG.
 "tmux/tmux.conf" = "~/.tmux.conf"
