@@ -1,45 +1,39 @@
 # dotfiles
 
-These are my dotfiles for vim, git, and tmux.
+These are my dotfiles for the various programs that I use.
 
 ## Prerequisites
 
-### The Escape Key
+### dotters
 
-The Escape key on most modern keyboards are ridiculously small. The best way I
-have found to solve this problem is to remap the Caps Lock key to be a second
-Escape key, or to switch the Caps Lock key with the Escape key.
+I use [dotter](https://github.com/SuperCuber/dotter) to manage the templating
+and deployment of my dotfiles. If this is not available in your package manager,
+it can be easily installed if you have a Rust toolchain installed.
 
-- In OSX, I use [Seil](https://pqrs.org/osx/karabiner/seil.html) to set the
-  control key to be a second Escape key.
-```
-brew cask install seil
+```sh
+cargo install dotter
 ```
 
-- After updating macOS to Sierra, Seil no longer works. The updated version of
-  the tool seems to be called
-  [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements).
-```
-brew cask install karabiner-elements
+Once this repo is cloned, add a `local.toml` file containing all of the dotfile
+`packages` that should be installed on the local machine. It should look
+something like this:
+
+```toml
+packages = ["git", "readline"]
 ```
 
-- In Xubuntu, I create the file `~/.Xmodmap` with the contents:
-```
-! Swap Caps Lock and Escape keys
-remove Lock = Caps_Lock
-keysym Escape = Caps_Lock
-keysym Caps_Lock = Escape
-add Lock = Caps_Lock
-```
-then I run the command `xmodmap ~/.Xmodmap` to exchange the Caps Lock Key with
-the Escape key.
+This is also the file where you locally override any variables in `global.toml`
+that need to be overwritten.
 
-- In Windows, I use [SharpKeys](https://sharpkeys.codeplex.com/).
+You can dry-run your dotfiles deployment to make sure that nothing unexpected
+will happen:
 
-- In Ubuntu, I use gnome-tweak-tool
-```
-sudo apt-get install gnome-tweak-tool
+```sh
+dotter --dry-run
 ```
 
-### Vim Package Manager
-My current package manager of choice is [Vundle](https://github.com/gmarik/Vundle.vim).
+Finally, deploy your dotfiles using the command:
+
+```sh
+dotter
+```

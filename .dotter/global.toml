@@ -1,0 +1,29 @@
+[git.files]
+"git/config" = "~/.config/git/config"
+"git/ignore" = "~/.config/git/ignore"
+
+[git.variables]
+name = "Yung-Jin (Joey) Hu"
+email = "yungjinhu@gmail.com"
+
+[readline.files]
+"readline/inputrc" = "~/.inputrc"
+
+[idea.files]
+"idea/ideavimrc" = "~/.ideavimrc"
+
+[zsh.files]
+# We set the XDG environment variables in this file, zsh will not respect XDG
+# until after this file is sourced.
+"zsh/zshenv" = "~/.zshenv"
+"zsh/zprofile" = "~/.config/zsh/.zprofile"
+"zsh/zshrc" = "~/.config/zsh/.zshrc"
+
+[tmux.files]
+# tmux does not respect XDG.
+"tmux/tmux.conf" = "~/.tmux.conf"
+
+[tmux.files."tmux/tmux-osx.conf"]
+target = "~/.tmux-osx.conf"
+type = "symbolic"
+if = '(command_success "test \"$(uname)\" = \"Darwin\"")'
