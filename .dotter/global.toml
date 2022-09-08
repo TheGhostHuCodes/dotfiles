@@ -31,3 +31,8 @@ email = "yungjinhu@gmail.com"
 target = "~/.tmux-osx.conf"
 type = "symbolic"
 if = '(command_success "test \"$(uname)\" = \"Darwin\"")'
+
+[neovim.files]
+"nvim/init.lua" = "~/.config/nvim/init.lua"
+"nvim/lua/vars.lua" = "~/.config/nvim/lua/vars.lua"
+"nvim/lua/opts.lua" = "~/.config/nvim/lua/opts.lua"
