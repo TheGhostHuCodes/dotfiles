@@ -15,6 +15,9 @@ opt.fileencoding = "utf8"
 -- [[ Theme ]]
 opt.syntax = "ON"
 opt.termguicolors = true
+vim.cmd("colorscheme NeoSolarized")
+-- Use the Solarized Dark theme instead of Solarized Light.
+opt.background = "dark"
 
 -- [[ Search ]]
 opt.ignorecase = true

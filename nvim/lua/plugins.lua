@@ -7,6 +7,7 @@ require("packer").startup({
 			requires = "kyazdani42/nvim-web-devicons",
 		})
 		use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
+		use("overcache/NeoSolarized")
 	end,
 	config = {
 		package_root = vim.fn.stdpath("config") .. "/site/pack",
