@@ -31,3 +31,8 @@ opt.tabstop = 4
 -- [[ Splits ]]
 opt.splitright = true
 opt.splitbelow = true
+
+-- [[ Clipboard ]]
+-- Use the + register (system clipboard) instead of the regular unnamed
+-- register. The regular unnamed register can only be accessed from inside vim.
+opt.clipboard = "unnamedplus"

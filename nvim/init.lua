@@ -5,5 +5,13 @@ vim.g.localleader = "\\"
 -- IMPORTS
 require("vars")
 require("opts")
--- require('keys')
--- require('plug')
+require("keymappings")
+require("plugins")
+
+-- PLUGINS
+require("nvim-tree").setup()
+require("lualine").setup({
+	options = {
+		theme = "solarized_dark",
+	},
+})
