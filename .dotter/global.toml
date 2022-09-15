@@ -38,3 +38,4 @@ if = '(command_success "test \"$(uname)\" = \"Darwin\"")'
 "nvim/lua/options.lua" = "~/.config/nvim/lua/options.lua"
 "nvim/lua/keymappings.lua" = "~/.config/nvim/lua/keymappings.lua"
 "nvim/lua/plugins.lua" = "~/.config/nvim/lua/plugins.lua"
+"nvim/spell/en.utf-8.add" = "~/.config/nvim/spell/en.utf-8.add"
