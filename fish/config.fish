@@ -5,6 +5,6 @@ if status is-interactive
 
     alias vi="nvim"
 
-    # https://angristan.xyz/how-to-use-nvm-rbenv-pyenv-goenv-with-fish-shell/
-    #source (pyenv init - | psub)
+    # Initialize pyenv when starting a new terminal.
+    pyenv init - | source
 end
